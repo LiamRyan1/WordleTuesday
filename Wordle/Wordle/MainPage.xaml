@@ -4,8 +4,22 @@
              x:Class="Wordle.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout
-          
+        <VerticalStackLayout>
+            <!--create a grid with 6 rows and 5 columns for the letters-->
+            <Grid x:Name="LetterCaptureGrid"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                  HeightRequest="300" WidthRequest="200"
+                  RowSpacing="1" ColumnSpacing="1" BackgroundColor="White"
+                  Padding="20">
+            </Grid>
+
+
+
+            <!-- on screen keyboard -->
+            <Grid x:Name="Keyboard" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="5">
+                <Grid x:Name="Keys" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                </Grid>
+            </Grid>
+            <Button x:Name="StartWordle" Text="Begin Game" Clicked="StartWordle_Clicked" HorizontalOptions="Center" VerticalOptions="Center"/>
         </VerticalStackLayout>
     </ScrollView>
 
