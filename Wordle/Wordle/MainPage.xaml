@@ -7,7 +7,7 @@
         <VerticalStackLayout>
             <!--create a grid with 6 rows and 5 columns for the letters-->
             <Grid x:Name="LetterCaptureGrid"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                  HeightRequest="300" WidthRequest="200"
+                  HeightRequest="400" WidthRequest="300"
                   RowSpacing="1" ColumnSpacing="1" BackgroundColor="White"
                   Padding="20">
             </Grid>

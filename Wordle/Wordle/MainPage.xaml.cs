@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui.Controls;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Wordle;
 
@@ -9,41 +10,41 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
     }
-
     private void CreateTheGrid()
     {
-
-        for (int j = 0; j < 5; j++)
+        for (int i = 0; i < 5; i++)
         {
             LetterCaptureGrid.AddRowDefinition(new RowDefinition());
-
-
         }
-        for (int j = 0; j < 6; j++)
+
+        for (int i = 0; i < 6; i++)
         {
             LetterCaptureGrid.AddColumnDefinition(new ColumnDefinition());
         }
-        for (int j = 0; j < 5; j++)
+
+        for (int i = 0; i < 6; i++)
         {
-            for (int i = 0; i < 6; i++)
+            for (int j = 0; j < 5; j++)
             {
                 Frame styledFrame = new Frame
                 {
-                    BorderColor = Color.FromRgb(50, 50, 50), //Set the background color
-                    CornerRadius = 10, //set rounded corners
-                    HasShadow = true, //add a shadow effect
-                    Padding = new Thickness(10), //Add padding to the frame
+                    BorderColor = Color.FromRgb(50, 50, 50),
+                    CornerRadius = 10,
+                    HasShadow = true,
+                    Padding = new Thickness(10),
                 };
                 LetterCaptureGrid.Add(styledFrame, j, i);
             }
-
         }
+
         StartWordle.SetValue(Button.IsEnabledProperty, false);
     }
+
     private void StartWordle_Clicked(object sender, EventArgs e)
     {
         CreateTheGrid();
         CreateKeyboard();
+        WordofTheDay();
     }
     private void CreateKeyboard()
     {
@@ -67,7 +68,7 @@ public partial class MainPage : ContentPage
                 };
                 Keys.Add(styledFrame1, i, j);
             }
-          
+
         }
         //creat the buttons
         for (int i = 0; i < 3; i++)
@@ -102,21 +103,92 @@ public partial class MainPage : ContentPage
 
         return Letter[row, column];
     }
+
     private void OnButtonClicked(object sender, EventArgs e)
     {
+       
         if (sender is Button button)
         {
-            // Handle button click action
-
+            // Get the clicked letter from the button
+            string letter = button.Text;
             if (button.Text == "")
             {
                 DisplayAlert("Button Clicked", $"You clicked button is empty", "OK");
             }
+            // Update the content of the first empty frame in the letter grid
             else
             {
-                DisplayAlert("Button Clicked", $"You clicked button {button.Text}", "OK");
+                addLetter(letter);
+                validateWord();
+            }
+        }
+    }
+    private void addLetter(string letter)
+    {
+        foreach (View view in LetterCaptureGrid.Children)
+        {
+            if (view is Frame frame && frame.Content == null)
+            {
+                frame.Content = new Label
+                {
+                    Text = letter,
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                };
+                break;
+            }
+        }
+    }
+    //download and read from json
+    private string WordofTheDay()
+    {
+        return "donny";
+    }
+
+    private void validateWord()
+    {
+
+        for (int i = 0; i < LetterCaptureGrid.RowDefinitions.Count; i++)
+        {
+
+            StringBuilder GuessedWord = new StringBuilder();
+
+            foreach (View view in LetterCaptureGrid.Children)
+            {
+                if (view is Frame frame && Grid.GetRow(frame) == i && frame.Content != null)
+                {
+                    if (frame.Content is Label label)
+                    {
+                        string letter = label.Text;
+                        GuessedWord.Append(letter);
+                    }
+                }
+            }
+            // Compare the row content with the Word of the Day
+            string playersword = GuessedWord.ToString();
+            if (playersword.Equals(WordofTheDay(), StringComparison.OrdinalIgnoreCase))
+            {
+
+                // Player guessed correctly
+                DisplayAlert("Congratulations!", "You guessed correctly!", "OK");
+                break;
+            }
+            else
+            {
+                string WordOfTheDay = WordofTheDay();
+               for(int j = 0; j < playersword.Length; j++)
+                {
+                    char guessedLetter = playersword[j];
+                    char actualLetter = WordOfTheDay[j];
+                    if (char.ToUpper(guessedLetter).Equals(char.ToUpper(actualLetter)))
+                    {
+                   
+                    }
+              
+                }
             }
         }
     }
 }
  
+
