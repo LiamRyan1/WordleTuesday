@@ -48,16 +48,13 @@ public partial class MainPage : ContentPage
     }
     private void CreateKeyboard()
     {
-
-
-
         for (int i = 0; i < 3; i++)
         {
-            Keys.AddRowDefinition(new RowDefinition { Height = GridLength.Star });
+            Keys.AddRowDefinition(new RowDefinition());
 
             for (int j = 0; j < 10; j++)
             {
-                Keys.AddColumnDefinition(new ColumnDefinition { Width = GridLength.Star });
+                Keys.AddColumnDefinition(new ColumnDefinition());
                 Frame styledFrame1 = new Frame
                 {
                     CornerRadius = 10,
@@ -216,6 +213,12 @@ public partial class MainPage : ContentPage
         }
     }
 
+    private void Settings_Clicked_1(object sender, EventArgs e)
+    {
+        DisplayAlert("Congratulations!", "You entered  settings!", "OK");
+    }
+
+    
 }
 
 

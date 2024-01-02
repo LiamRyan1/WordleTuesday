@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Wordle.MainPage">
+             x:Class="Wordle.MainPage"
+             Title="Wordle Tuesday">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Clicked="Settings_Clicked_1"/>
+    </ContentPage.ToolbarItems>
 
     <ScrollView>
         <VerticalStackLayout>
@@ -15,10 +19,10 @@
 
 
             <!-- on screen keyboard -->
-            <Grid x:Name="Keyboard" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="5">
-                <Grid x:Name="Keys" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                </Grid>
-            </Grid>
+
+            <Grid x:Name="Keys" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="20"/>
+
+
             <Button x:Name="StartWordle" Text="Begin Game" Clicked="StartWordle_Clicked" HorizontalOptions="Center" VerticalOptions="Center"/>
         </VerticalStackLayout>
     </ScrollView>
