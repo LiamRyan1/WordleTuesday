@@ -12,12 +12,12 @@ public partial class MainPage : ContentPage
     }
     private void CreateTheGrid()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             LetterCaptureGrid.AddRowDefinition(new RowDefinition());
         }
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 5; i++)
         {
             LetterCaptureGrid.AddColumnDefinition(new ColumnDefinition());
         }
