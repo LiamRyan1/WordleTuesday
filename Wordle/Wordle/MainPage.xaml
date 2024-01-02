@@ -9,7 +9,7 @@
             <Grid x:Name="LetterCaptureGrid"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                   HeightRequest="400" WidthRequest="300"
                   RowSpacing="1" ColumnSpacing="1" BackgroundColor="White"
-                  Padding="20">
+                  Padding="20" >
             </Grid>
 
 

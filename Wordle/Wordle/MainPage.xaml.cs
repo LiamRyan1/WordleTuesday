@@ -103,10 +103,10 @@ public partial class MainPage : ContentPage
 
         return Letter[row, column];
     }
-
+    public static int count = 0;
     private void OnButtonClicked(object sender, EventArgs e)
     {
-       
+      
         if (sender is Button button)
         {
             // Get the clicked letter from the button
@@ -119,7 +119,13 @@ public partial class MainPage : ContentPage
             else
             {
                 addLetter(letter);
-                validateWord();
+                count++;
+                if (count == 5)
+                {
+                    validateWord();
+                    count = 0;
+                }
+                
             }
         }
     }
@@ -147,11 +153,11 @@ public partial class MainPage : ContentPage
 
     private void validateWord()
     {
+        string wordOfTheDay = WordofTheDay().ToUpper(); // Convert Word of the Day to uppercase for case-insensitive comparison
 
         for (int i = 0; i < LetterCaptureGrid.RowDefinitions.Count; i++)
         {
-
-            StringBuilder GuessedWord = new StringBuilder();
+            StringBuilder guessedWord = new StringBuilder();
 
             foreach (View view in LetterCaptureGrid.Children)
             {
@@ -160,35 +166,56 @@ public partial class MainPage : ContentPage
                     if (frame.Content is Label label)
                     {
                         string letter = label.Text;
-                        GuessedWord.Append(letter);
+                        guessedWord.Append(letter);
                     }
                 }
             }
-            // Compare the row content with the Word of the Day
-            string playersword = GuessedWord.ToString();
-            if (playersword.Equals(WordofTheDay(), StringComparison.OrdinalIgnoreCase))
-            {
 
-                // Player guessed correctly
+            string playerWord = guessedWord.ToString().ToUpper(); // Convert player's word to uppercase for case-insensitive comparison
+
+            // Compare the row content with the Word of the Day
+            if (playerWord.Equals(wordOfTheDay, StringComparison.OrdinalIgnoreCase))
+            {
+                for (int j = 0; j < playerWord.Length; j++)
+                {
+                    char guessedLetter = playerWord[j];
+                    // Player guessed correctly
+                    LetterCaptureGrid.Children
+                              .OfType<Frame>()
+                              .First(frame => Grid.GetRow(frame) == i && frame.Content is Label label && label.Text == guessedLetter.ToString())
+                              .BackgroundColor = Color.FromRgb(34, 139, 34);
+                }
                 DisplayAlert("Congratulations!", "You guessed correctly!", "OK");
-                break;
+               
             }
             else
             {
-                string WordOfTheDay = WordofTheDay();
-               for(int j = 0; j < playersword.Length; j++)
+                for (int j = 0; j < playerWord.Length; j++)
                 {
-                    char guessedLetter = playersword[j];
-                    char actualLetter = WordOfTheDay[j];
-                    if (char.ToUpper(guessedLetter).Equals(char.ToUpper(actualLetter)))
+                    char guessedLetter = playerWord[j];
+                    char actualLetter = wordOfTheDay[j];
+
+                    // Correct letter in the correct position: change the grid cell of the guessed letters background to green
+                    if (guessedLetter == actualLetter)
                     {
-                   
+                        LetterCaptureGrid.Children
+                            .OfType<Frame>()
+                            .First(frame => Grid.GetRow(frame) == i && Grid.GetColumn(frame) == j)
+                            .BackgroundColor = Color.FromRgb(34, 139, 34);
                     }
-              
+                    // Correct letter in the wrong position: change the grid cell of the guessed letters background to yellow
+                    else if (wordOfTheDay.Contains(guessedLetter))
+                    {
+                        LetterCaptureGrid.Children
+                            .OfType<Frame>()
+                            .First(frame => Grid.GetRow(frame) == i && frame.Content is Label label && label.Text == guessedLetter.ToString())
+                            .BackgroundColor = Color.FromRgb(255,255,153);
+                    }
                 }
             }
         }
     }
+
 }
- 
+
 
