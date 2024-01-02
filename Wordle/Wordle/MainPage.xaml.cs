@@ -218,7 +218,7 @@ public partial class MainPage : ContentPage
 
     private void Settings_Clicked_1(object sender, EventArgs e)
     {
-        DisplayAlert("Congratulations!", "You entered  settings!", "OK");
+        DisplayAlert("Congratulations!", "You entered the settings!", "OK");
     }
 
     
