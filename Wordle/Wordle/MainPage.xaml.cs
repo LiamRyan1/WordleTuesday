@@ -85,6 +85,8 @@ public partial class MainPage : ContentPage
         {
             Text = GetButtonText(row, column),
             BackgroundColor = Color.FromRgb(50, 50, 50),
+            FontAutoScalingEnabled = true,
+            
         };
         buttons.Clicked += OnButtonClicked;
         return buttons;
