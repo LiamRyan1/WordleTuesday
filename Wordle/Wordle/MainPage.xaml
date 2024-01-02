@@ -4,7 +4,7 @@
              x:Class="Wordle.MainPage"
              Title="Wordle Tuesday">
     <ContentPage.ToolbarItems>
-        <ToolbarItem  Clicked="Settings_Clicked_1"/>
+        <ToolbarItem  IconImageSource="{AppThemeBinding Light=settings.png, Dark=settingsdark.png}"  Clicked="Settings_Clicked_1"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>
