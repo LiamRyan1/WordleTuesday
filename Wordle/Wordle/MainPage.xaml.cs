@@ -87,8 +87,10 @@ public partial class MainPage : ContentPage
             Text = GetButtonText(row, column),
             BackgroundColor = Color.FromRgb(50, 50, 50),
             Padding = new Thickness(10),
+            HorizontalOptions = LayoutOptions.FillAndExpand,
         };
-        buttons.FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Button));
+        buttons.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Button)) * 0.8; // Adjust the multiplier as needed
+
         buttons.Clicked += OnButtonClicked;
         return buttons;
     }
