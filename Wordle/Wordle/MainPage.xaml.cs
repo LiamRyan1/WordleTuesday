@@ -60,6 +60,7 @@ public partial class MainPage : ContentPage
                     CornerRadius = 10,
                     BorderColor = Color.FromRgb(0, 0, 0),
                     HasShadow = true,
+                    Padding= new Thickness(10),
                     VerticalOptions = LayoutOptions.Center,
                     HorizontalOptions = LayoutOptions.Center,
                 };
