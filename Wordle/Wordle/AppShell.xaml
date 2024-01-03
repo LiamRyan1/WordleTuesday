@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:Wordle"
     Shell.FlyoutBehavior="Disabled">
     <ShellContent
-        Title="welcome"
+        Title="Welcome"
            ContentTemplate="{DataTemplate local:WelcomePage}"
         Route="WelcomePage"/>
     <ShellContent

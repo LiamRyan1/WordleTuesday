@@ -6,6 +6,8 @@ namespace Wordle;
 
 public partial class MainPage : ContentPage
 {
+    private Settings set;
+    private bool fromSettingsPage = false;
     public MainPage()
     {
         InitializeComponent();
@@ -218,12 +220,15 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private async void Settings_Clicked_1(object sender, EventArgs e)
+    private async void Settings_Clicked(object sender, EventArgs e)
     {
-        DisplayAlert("Congratulations!", "You entered the settings!", "OK");
+        fromSettingsPage = true;
+        await Navigation.PushAsync(new SettingsPage());
     }
 
     
+
+
 }
 
 
