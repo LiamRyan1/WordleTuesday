@@ -3,12 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wordle.WelcomePage"
              Title="WelcomePage">
+    <ScrollView HorizontalOptions="Center" VerticalOptions="Center">
+        <VerticalStackLayout Spacing="3">
+            <Entry
+                    x:Name="UsernameEntry"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Placeholder="Username" />
 
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button x:Name="PlayGame" Text="Play Game" Clicked="PlayGame_Clicked"/>
-    </VerticalStackLayout>
+            <Button
+                    x:Name="LoginButton"
+                    Margin="10,5"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="EndAndExpand"
+                    Text="Login"
+                    Clicked="PlayGame_Clicked">
+            </Button>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

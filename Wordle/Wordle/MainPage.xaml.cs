@@ -6,7 +6,7 @@ namespace Wordle;
 
 public partial class MainPage : ContentPage
 {
-    private Settings set;
+
     private bool fromSettingsPage = false;
     public MainPage()
     {
@@ -222,13 +222,9 @@ public partial class MainPage : ContentPage
 
     private async void Settings_Clicked(object sender, EventArgs e)
     {
-        fromSettingsPage = true;
+      
         await Navigation.PushAsync(new SettingsPage());
     }
-
-    
-
-
 }
 
 
