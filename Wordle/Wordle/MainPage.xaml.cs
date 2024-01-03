@@ -106,7 +106,7 @@ public partial class MainPage : ContentPage
         return Letter[row, column];
     }
     public static int count = 0;
-    private void OnButtonClicked(object sender, EventArgs e)
+    private async void OnButtonClicked(object sender, EventArgs e)
     {
       
         if (sender is Button button)
@@ -218,7 +218,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void Settings_Clicked_1(object sender, EventArgs e)
+    private async void Settings_Clicked_1(object sender, EventArgs e)
     {
         DisplayAlert("Congratulations!", "You entered the settings!", "OK");
     }

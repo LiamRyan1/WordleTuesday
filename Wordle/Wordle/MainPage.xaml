@@ -20,7 +20,7 @@
 
             <!-- on screen keyboard -->
 
-            <Grid x:Name="Keys" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="20"/>
+            <Grid x:Name="Keys" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="20" RowSpacing="1" ColumnSpacing="1" />
 
 
             <Button x:Name="StartWordle" Text="Begin Game" Clicked="StartWordle_Clicked" HorizontalOptions="Center" VerticalOptions="Center"/>

@@ -5,7 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Wordle"
     Shell.FlyoutBehavior="Disabled">
-
+    <ShellContent
+        Title="welcome"
+           ContentTemplate="{DataTemplate local:WelcomePage}"
+        Route="WelcomePage"/>
     <ShellContent
         Title="Wordle" 
         ContentTemplate="{DataTemplate local:MainPage}"

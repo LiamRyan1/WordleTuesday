@@ -43,3 +43,15 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Wordle.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[C:/Users/tiafa/OneDrive - Atlantic TU/Year 2/Internet and Mobile Application Development/Wordle/LiamRyan/Wordle/Wordle/SettingsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Wordle.SettingsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = SettingsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = SettingsPage.xaml
+
+[C:/Users/tiafa/OneDrive - Atlantic TU/Year 2/Internet and Mobile Application Development/Wordle/LiamRyan/Wordle/Wordle/WelcomePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Wordle.WelcomePage.xaml
+build_metadata.AdditionalFiles.TargetPath = WelcomePage.xaml
+build_metadata.AdditionalFiles.RelativePath = WelcomePage.xaml
