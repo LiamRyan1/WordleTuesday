@@ -12,6 +12,7 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
         CreateTheGrid();
+        set = new Settings();
         set.StylingChanged += OnStylingChanged;
     }
     private void CreateTheGrid()
@@ -232,7 +233,7 @@ public partial class MainPage : ContentPage
     }
     private void OnStylingChanged(object sender, EventArgs e)
     {
-        // Update the styling of buttons and frames here
+      
         UpdateButtonStyling();
         UpdateFrameStyling();
     }
@@ -242,7 +243,7 @@ public partial class MainPage : ContentPage
         {
             if (view is Button button)
             {
-                button.BackgroundColor = Color.FromRgb(255, 255, 255); // Adjust the color as needed
+                button.BackgroundColor = Color.FromRgb(255, 255, 255); 
             }
         }
     }
@@ -252,11 +253,10 @@ public partial class MainPage : ContentPage
         {
             if (view is Frame frame)
             {
-                frame.BorderColor = Color.FromRgb(255, 255, 255); // Adjust the color as needed
+                frame.BorderColor = Color.FromRgb(255, 255, 255); 
             }
         }
     }
 }
 
 
-//Style="{DynamicResource Keyboard}"
