@@ -9,6 +9,29 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Color x:Key="PrimaryColor">White</Color>
+            <Color x:Key="SecondaryColor">darkGray</Color>
+            <Color x:Key="ThirdColor">Black</Color>
+
+            <Style x:Key="LetterFrame" TargetType="Frame">
+                <Setter Property="BorderColor" Value="LightGray"/>
+                <Setter Property="Padding" Value="14,14" />
+                <Setter Property="WidthRequest" Value="65"/>
+                <Setter Property="HeightRequest" Value="80"/>
+            </Style>
+
+            <Style x:Key= "Keyboard" TargetType="Button">
+                <Setter Property="TextColor" Value="{DynamicResource ThirdColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="FontFamily" Value="OpenSansRegular" />
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BorderWidth" Value="2"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="WidthRequest" Value="35"/>
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="Padding" Value="4" />
+
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

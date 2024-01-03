@@ -7,10 +7,12 @@ namespace Wordle;
 public partial class MainPage : ContentPage
 {
 
-    private bool fromSettingsPage = false;
+    private Settings set;
     public MainPage()
     {
         InitializeComponent();
+        CreateTheGrid();
+        set.StylingChanged += OnStylingChanged;
     }
     private void CreateTheGrid()
     {
@@ -37,14 +39,11 @@ public partial class MainPage : ContentPage
                 };
                 LetterCaptureGrid.Add(styledFrame, j, i);
             }
-        }
-
-        StartWordle.SetValue(Button.IsEnabledProperty, false);
+        } 
     }
 
     private void StartWordle_Clicked(object sender, EventArgs e)
     {
-        CreateTheGrid();
         CreateKeyboard();
         WordofTheDay();
     }
@@ -59,12 +58,14 @@ public partial class MainPage : ContentPage
                 Keys.AddColumnDefinition(new ColumnDefinition());
                 Frame styledFrame1 = new Frame
                 {
+                    StyleId = "CapturegridFrames",
                     CornerRadius = 10,
                     BorderColor = Color.FromRgb(0, 0, 0),
                     HasShadow = true,
-                    Padding= new Thickness(10),
+                    Padding = new Thickness(10),
                     VerticalOptions = LayoutOptions.Center,
                     HorizontalOptions = LayoutOptions.Center,
+
                 };
                 Keys.Add(styledFrame1, i, j);
             }
@@ -81,14 +82,18 @@ public partial class MainPage : ContentPage
                 Keys.Children.Add(button);
             }
         }
+        StartWordle.SetValue(Button.IsEnabledProperty, false);
     }
     private Button createbuttons(int row, int column)
     {
         Button buttons = new Button
         {
+            StyleId = "KeyboardButtons",
             Text = GetButtonText(row, column),
             BackgroundColor = Color.FromRgb(50, 50, 50),
             Padding = new Thickness(10),
+            HeightRequest = 50,
+            WidthRequest = 35,
             HorizontalOptions = LayoutOptions.FillAndExpand,
         };
         buttons.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Button)) * 0.8; // Adjust the multiplier as needed
@@ -223,8 +228,35 @@ public partial class MainPage : ContentPage
     private async void Settings_Clicked(object sender, EventArgs e)
     {
       
-        await Navigation.PushAsync(new SettingsPage());
+        await Navigation.PushAsync(new SettingsPage(set));
+    }
+    private void OnStylingChanged(object sender, EventArgs e)
+    {
+        // Update the styling of buttons and frames here
+        UpdateButtonStyling();
+        UpdateFrameStyling();
+    }
+    private void UpdateButtonStyling()
+    {
+        foreach (View view in Keys.Children)
+        {
+            if (view is Button button)
+            {
+                button.BackgroundColor = Color.FromRgb(255, 255, 255); // Adjust the color as needed
+            }
+        }
+    }
+    private void UpdateFrameStyling()
+    {
+        foreach (View view in LetterCaptureGrid.Children)
+        {
+            if (view is Frame frame)
+            {
+                frame.BorderColor = Color.FromRgb(255, 255, 255); // Adjust the color as needed
+            }
+        }
     }
 }
 
 
+//Style="{DynamicResource Keyboard}"

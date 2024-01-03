@@ -9,6 +9,7 @@ public partial class WelcomePage : ContentPage
 
     private async void PlayGame_Clicked(object sender, EventArgs e)
     {
+        
         await Shell.Current.GoToAsync("//MainPage", true);
     }
 }

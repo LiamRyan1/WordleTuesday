@@ -8,11 +8,11 @@
     </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
             <!--create a grid with 6 rows and 5 columns for the letters-->
-            <Grid x:Name="LetterCaptureGrid"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+            <Grid x:Name="LetterCaptureGrid" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                   HeightRequest="400" WidthRequest="300"
-                  RowSpacing="1" ColumnSpacing="1" BackgroundColor="White"
+                  RowSpacing="1" ColumnSpacing="1" 
                   Padding="20" >
             </Grid>
 
@@ -20,9 +20,9 @@
 
             <!-- on screen keyboard -->
 
-            <Grid x:Name="Keys" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="20" RowSpacing="1" ColumnSpacing="1" />
-
-
+            <Grid x:Name="Keys" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="20" RowSpacing="1" ColumnSpacing="1" >
+            </Grid>
+            
             <Button x:Name="StartWordle" Text="Begin Game" Clicked="StartWordle_Clicked" HorizontalOptions="Center" VerticalOptions="Center"/>
         </VerticalStackLayout>
     </ScrollView>

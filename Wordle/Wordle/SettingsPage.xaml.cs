@@ -2,16 +2,21 @@ namespace Wordle;
 
 public partial class SettingsPage : ContentPage
 {
-  
-    public SettingsPage()
+    Settings set;
+    public SettingsPage(Settings s)
     {
-       
+        set = s;
         InitializeComponent();
-       
+        BindingContext = set;
     }
 
     private async void SaveSettingsBtn_Clicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
+    }
+
+    private void LightMode_Clicked(object sender, EventArgs e)
+    {
+        set.lightmode();
     }
 }
