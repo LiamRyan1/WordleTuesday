@@ -19,4 +19,11 @@ public partial class SettingsPage : ContentPage
     {
         set.lightmode();
     }
+
+    private void Dark_Clicked(object sender, EventArgs e)
+    {
+        set.darkmode();
+    }
+
+ 
 }

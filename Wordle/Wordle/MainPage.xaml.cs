@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Controls;
+﻿
+using Microsoft.Maui.Controls;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -8,12 +9,14 @@ public partial class MainPage : ContentPage
 {
 
     private Settings set;
+    
     public MainPage()
     {
         InitializeComponent();
         CreateTheGrid();
         set = new Settings();
         set.StylingChanged += OnStylingChanged;
+        set.StylingChanged2 += OnStylingChanged2;
     }
     private void CreateTheGrid()
     {
@@ -237,6 +240,12 @@ public partial class MainPage : ContentPage
         UpdateButtonStyling();
         UpdateFrameStyling();
     }
+    private void OnStylingChanged2(object sender, EventArgs e)
+    {
+
+        UpdateButtonStyling2();
+        UpdateFrameStyling2();
+    }
     private void UpdateButtonStyling()
     {
         foreach (View view in Keys.Children)
@@ -245,6 +254,19 @@ public partial class MainPage : ContentPage
             {
                 button.BackgroundColor = Color.FromRgb(255, 255, 255);
                 button.TextColor = Color.FromRgb(0, 0, 0);
+                button.BorderColor = Color.FromRgb(0, 0, 0);
+            }
+        }
+    }
+    private void UpdateButtonStyling2()
+    {
+        foreach (View view in Keys.Children)
+        {
+            if (view is Button button)
+            {
+                button.BorderColor = Color.FromRgb(255, 255, 255);
+                button.BackgroundColor = Color.FromRgb(0, 0, 0);
+                button.TextColor = Color.FromRgb(255, 255, 255);
             }
         }
     }
@@ -259,6 +281,21 @@ public partial class MainPage : ContentPage
                if (frame.Content is Label label)
                 {
                     label.TextColor = Color.FromRgb(0, 0, 0);
+                }
+            }
+        }
+    }
+    private void UpdateFrameStyling2()
+    {
+        foreach (View view in LetterCaptureGrid.Children)
+        {
+            if (view is Frame frame)
+            {
+                frame.BorderColor = Color.FromRgb(255, 255, 255);
+                frame.BackgroundColor = Color.FromRgb(0, 0, 0);
+                if (frame.Content is Label label)
+                {
+                    label.TextColor = Color.FromRgb(255, 255, 255);
                 }
             }
         }

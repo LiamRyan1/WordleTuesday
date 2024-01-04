@@ -5,6 +5,7 @@
              Title="SettingsPage">
     <VerticalStackLayout>
         <Button Text="light" Clicked="LightMode_Clicked"  HorizontalOptions="Center" VerticalOptions="Center" Margin="10"/>
+        <Button Text="Dark" Clicked="Dark_Clicked"  HorizontalOptions="Center" VerticalOptions="Center" Margin="10"/>
         <Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
