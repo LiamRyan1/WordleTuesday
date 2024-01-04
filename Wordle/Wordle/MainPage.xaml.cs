@@ -18,6 +18,7 @@ public partial class MainPage : ContentPage
         set.StylingChanged += OnStylingChanged;
         set.StylingChanged2 += OnStylingChanged2;
     }
+    //Create the grid for the letters to be captured in
     private void CreateTheGrid()
     {
         for (int i = 0; i < 6; i++)
@@ -45,66 +46,51 @@ public partial class MainPage : ContentPage
             }
         } 
     }
-
+    //Start game button - creates an on screen keyboard and  generates the word of the day
     private void StartWordle_Clicked(object sender, EventArgs e)
     {
         CreateKeyboard();
         WordofTheDay();
     }
+    //on screen keyboard
     private void CreateKeyboard()
     {
         for (int i = 0; i < 3; i++)
         {
             Keys.AddRowDefinition(new RowDefinition());
-
-            for (int j = 0; j < 10; j++)
-            {
-                Keys.AddColumnDefinition(new ColumnDefinition());
-                Frame styledFrame1 = new Frame
-                {
-                    StyleId = "CapturegridFrames",
-                    CornerRadius = 10,
-                    BorderColor = Color.FromRgb(0, 0, 0),
-                    HasShadow = true,
-                    Padding = new Thickness(10),
-                    VerticalOptions = LayoutOptions.Center,
-                    HorizontalOptions = LayoutOptions.Center,
-
-                };
-                Keys.Add(styledFrame1, i, j);
-            }
-
         }
-        //creat the buttons
-        for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 10; j++)
         {
-            for (int j = 0; j < 10; j++)
-            {
-                Button button = createbuttons(i, j);
-                Grid.SetRow(button, i);
-                Grid.SetColumn(button, j);
-                Keys.Children.Add(button);
-            }
+            Keys.AddColumnDefinition(new ColumnDefinition());
         }
+        //add buttons to thethe keyboard grid
+          for (int i = 0; i < 3; i++)
+          {
+             for (int j = 0; j < 10; j++)
+             {
+                Button button = createbuttons(i, j);
+                 Grid.SetRow(button, i);
+                     Grid.SetColumn(button, j);
+                     Keys.Add(button);
+                 }
+          }
         StartWordle.SetValue(Button.IsEnabledProperty, false);
     }
+    //create the keyboard buttons
     private Button createbuttons(int row, int column)
     {
         Button buttons = new Button
         {
-            StyleId = "KeyboardButtons",
             Text = GetButtonText(row, column),
             BackgroundColor = Color.FromRgb(50, 50, 50),
-            Padding = new Thickness(10),
-            HeightRequest = 50,
-            WidthRequest = 35,
-            HorizontalOptions = LayoutOptions.FillAndExpand,
         };
-        buttons.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Button)) * 0.8; // Adjust the multiplier as needed
+        buttons.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Button)) * 0.8; 
 
         buttons.Clicked += OnButtonClicked;
         return buttons;
     }
+    
+    //text for the buttons
     private string GetButtonText(int row, int column)
     {
         string[,] Letter = new string[,]
@@ -116,6 +102,7 @@ public partial class MainPage : ContentPage
 
         return Letter[row, column];
     }
+    //counter
     public static int count = 0;
     private async void OnButtonClicked(object sender, EventArgs e)
     {
@@ -132,9 +119,11 @@ public partial class MainPage : ContentPage
             else
             {
                 addLetter(letter);
+                //keep count of how many letters have been added to the grid
                 count++;
                 if (count == 5)
                 {
+                    //vlaidates the word in the row once number of letters equals 5
                     validateWord();
                     count = 0;
                 }
@@ -144,17 +133,28 @@ public partial class MainPage : ContentPage
     }
     private void addLetter(string letter)
     {
+        //goes through all Views in the lettercapture grid
         foreach (View view in LetterCaptureGrid.Children)
         {
+            //if the view is a frame and the frame is empty
             if (view is Frame frame && frame.Content == null)
             {
+                //adds a label with the letter from the button
                 frame.Content = new Label
                 {
                     Text = letter,
                     HorizontalOptions = LayoutOptions.CenterAndExpand,
                     VerticalOptions = LayoutOptions.CenterAndExpand,
+                  
                 };
-                break;
+                //check if the app is in dark or light mode and change text of label
+                if (theme == true && frame.Content is Label label)
+                {
+                    label.TextColor = Color.FromRgb(255, 255, 255);
+                }
+         
+                
+               break;
             }
         }
     }
@@ -166,8 +166,9 @@ public partial class MainPage : ContentPage
 
     private void validateWord()
     {
-        string wordOfTheDay = WordofTheDay().ToUpper(); // Convert Word of the Day to uppercase for case-insensitive comparison
+        string wordOfTheDay = WordofTheDay().ToUpper(); //case insensitive comparison
 
+        //build a string each row made up of the guessed letters
         for (int i = 0; i < LetterCaptureGrid.RowDefinitions.Count; i++)
         {
             StringBuilder guessedWord = new StringBuilder();
@@ -184,9 +185,9 @@ public partial class MainPage : ContentPage
                 }
             }
 
-            string playerWord = guessedWord.ToString().ToUpper(); // Convert player's word to uppercase for case-insensitive comparison
+            string playerWord = guessedWord.ToString().ToUpper(); 
 
-            // Compare the row content with the Word of the Day
+            //Compare the row content with the Word of the Day
             if (playerWord.Equals(wordOfTheDay, StringComparison.OrdinalIgnoreCase))
             {
                 for (int j = 0; j < playerWord.Length; j++)
@@ -201,6 +202,7 @@ public partial class MainPage : ContentPage
                 DisplayAlert("Congratulations!", "You guessed correctly!", "OK");
                
             }
+            //change backgorund colors of frame depending on level of correctness
             else
             {
                 for (int j = 0; j < playerWord.Length; j++)
@@ -208,7 +210,7 @@ public partial class MainPage : ContentPage
                     char guessedLetter = playerWord[j];
                     char actualLetter = wordOfTheDay[j];
 
-                    // Correct letter in the correct position: change the grid cell of the guessed letters background to green
+                    //Correct letter in the correct position
                     if (guessedLetter == actualLetter)
                     {
                         LetterCaptureGrid.Children
@@ -216,7 +218,7 @@ public partial class MainPage : ContentPage
                             .First(frame => Grid.GetRow(frame) == i && Grid.GetColumn(frame) == j)
                             .BackgroundColor = Color.FromRgb(34, 139, 34);
                     }
-                    // Correct letter in the wrong position: change the grid cell of the guessed letters background to yellow
+                    //Correct letter in the wrong position
                     else if (wordOfTheDay.Contains(guessedLetter))
                     {
                         LetterCaptureGrid.Children
@@ -228,12 +230,18 @@ public partial class MainPage : ContentPage
             }
         }
     }
-
+    //send to settings page
     private async void Settings_Clicked(object sender, EventArgs e)
     {
       
         await Navigation.PushAsync(new SettingsPage(set));
     }
+
+
+
+
+    //Light and darkMode
+    public bool theme = false;
     private void OnStylingChanged(object sender, EventArgs e)
     {
       
@@ -248,6 +256,7 @@ public partial class MainPage : ContentPage
     }
     private void UpdateButtonStyling()
     {
+        theme = false;
         foreach (View view in Keys.Children)
         {
             if (view is Button button)
@@ -260,6 +269,7 @@ public partial class MainPage : ContentPage
     }
     private void UpdateButtonStyling2()
     {
+        theme = true;
         foreach (View view in Keys.Children)
         {
             if (view is Button button)
@@ -272,27 +282,39 @@ public partial class MainPage : ContentPage
     }
     private void UpdateFrameStyling()
     {
+       
         foreach (View view in LetterCaptureGrid.Children)
         {
             if (view is Frame frame)
             {
                 frame.BorderColor = Color.FromRgb(0, 0, 0);
-                frame.BackgroundColor = Color.FromRgb(255, 255, 255);
+                if (frame.BackgroundColor != Color.FromRgb(34, 139, 34) || frame.BackgroundColor != Color.FromRgb(255, 255, 153))
+                {
+                    frame.BackgroundColor = Color.FromRgb(255, 255, 255);
+                
+                }
                if (frame.Content is Label label)
                 {
                     label.TextColor = Color.FromRgb(0, 0, 0);
                 }
             }
         }
+
     }
     private void UpdateFrameStyling2()
     {
+        
         foreach (View view in LetterCaptureGrid.Children)
         {
             if (view is Frame frame)
             {
+                
                 frame.BorderColor = Color.FromRgb(255, 255, 255);
-                frame.BackgroundColor = Color.FromRgb(0, 0, 0);
+                if (frame.BackgroundColor != Color.FromRgb(34, 139, 34) || frame.BackgroundColor != Color.FromRgb(255, 255, 153))
+                {
+                    frame.BackgroundColor = Color.FromRgb(0, 0, 0);
+                }
+
                 if (frame.Content is Label label)
                 {
                     label.TextColor = Color.FromRgb(255, 255, 255);
