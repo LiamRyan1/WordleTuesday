@@ -243,7 +243,8 @@ public partial class MainPage : ContentPage
         {
             if (view is Button button)
             {
-                button.BackgroundColor = Color.FromRgb(255, 255, 255); 
+                button.BackgroundColor = Color.FromRgb(255, 255, 255);
+                button.TextColor = Color.FromRgb(0, 0, 0);
             }
         }
     }
@@ -253,7 +254,12 @@ public partial class MainPage : ContentPage
         {
             if (view is Frame frame)
             {
-                frame.BorderColor = Color.FromRgb(255, 255, 255); 
+                frame.BorderColor = Color.FromRgb(0, 0, 0);
+                frame.BackgroundColor = Color.FromRgb(255, 255, 255);
+               if (frame.Content is Label label)
+                {
+                    label.TextColor = Color.FromRgb(0, 0, 0);
+                }
             }
         }
     }
