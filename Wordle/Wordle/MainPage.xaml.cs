@@ -2,24 +2,31 @@
 using Microsoft.Maui.Controls;
 using System.Runtime.InteropServices;
 using System.Text;
-
+using System.Net;
 namespace Wordle;
 
 public partial class MainPage : ContentPage
 {
 
     private Settings set;
-    
+    ListWords list;
     public MainPage()
     {
         InitializeComponent();
         CreateTheGrid();
+        list = new ListWords();
         set = new Settings();
         set.StylingChanged += OnStylingChanged;
         set.StylingChanged2 += OnStylingChanged2;
+        InitializeAsync();
     }
-    //Create the grid for the letters to be captured in
-    private void CreateTheGrid()
+    private async void InitializeAsync()
+    {
+        await list.getWordList();
+        
+    }
+//Create the grid for the letters to be captured in
+private void CreateTheGrid()
     {
         for (int i = 0; i < 6; i++)
         {
@@ -50,6 +57,7 @@ public partial class MainPage : ContentPage
     private void StartWordle_Clicked(object sender, EventArgs e)
     {
         CreateKeyboard();
+        string word = list.GenerateRandomWord();
         WordofTheDay();
     }
     //on screen keyboard
@@ -158,7 +166,8 @@ public partial class MainPage : ContentPage
             }
         }
     }
-    //download and read from json
+
+    
     private string WordofTheDay()
     {
         return "donny";
