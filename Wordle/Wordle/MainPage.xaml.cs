@@ -19,6 +19,7 @@ public partial class MainPage : ContentPage
         set.StylingChanged += OnStylingChanged;
         set.StylingChanged2 += OnStylingChanged2;
         InitializeAsync();
+
     }
     private async void InitializeAsync()
     {
@@ -57,7 +58,6 @@ private void CreateTheGrid()
     private void StartWordle_Clicked(object sender, EventArgs e)
     {
         CreateKeyboard();
-        string word = list.GenerateRandomWord();
         WordofTheDay();
     }
     //on screen keyboard
@@ -134,6 +134,7 @@ private void CreateTheGrid()
                     //vlaidates the word in the row once number of letters equals 5
                     validateWord();
                     count = 0;
+                    DisplayAlert("Button Clicked", $"random word is {WordofTheDay()}", "OK");
                 }
                 
             }
@@ -159,18 +160,23 @@ private void CreateTheGrid()
                 if (theme == true && frame.Content is Label label)
                 {
                     label.TextColor = Color.FromRgb(255, 255, 255);
-                }
-         
-                
+                }                        
                break;
             }
         }
     }
 
-    
+
+    public bool newWord = true;
+    public string word;
     private string WordofTheDay()
     {
-        return "donny";
+        if (newWord == true)
+        {
+            word = list.GenerateRandomWord();
+            newWord = false;
+        }
+        return word;
     }
 
     private void validateWord()

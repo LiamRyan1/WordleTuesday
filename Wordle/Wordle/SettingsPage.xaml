@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wordle.SettingsPage"
              Title="SettingsPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
         <Button Text="light" Clicked="LightMode_Clicked"  HorizontalOptions="Center" VerticalOptions="Center" Margin="10"/>
         <Button Text="Dark" Clicked="Dark_Clicked"  HorizontalOptions="Center" VerticalOptions="Center" Margin="10"/>
         <Label 
