@@ -93,7 +93,7 @@ private void CreateTheGrid()
         Button buttons = new Button
         {
             Text = GetButtonText(row, column),
-            BackgroundColor = Color.FromRgb(50, 50, 50),
+            BackgroundColor = Color.FromRgb(0, 0, 0),
         };
         buttons.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Button)) * 0.8; 
 
@@ -178,10 +178,10 @@ private void CreateTheGrid()
             word = list.GenerateRandomWord();
             newWord = false;
         }
-        return word;
+        return "donal";
     }
     //check if guessed word is correct
-    private void validateWord()
+    private async void validateWord()
     {
         string wordOfTheDay = WordofTheDay().ToUpper(); //case insensitive comparison
 
@@ -216,8 +216,16 @@ private void CreateTheGrid()
                               .First(frame => Grid.GetRow(frame) == i && frame.Content is Label label && label.Text == guessedLetter.ToString())
                               .BackgroundColor = Color.FromRgb(34, 139, 34);
                 }
-                DisplayAlert("Congratulations!", "You guessed correctly!", "OK");
-               
+               await DisplayAlert("Congratulations!", "You guessed correctly!", "OK"); 
+              bool restartView = await DisplayAlert("Question?", "Would you like to play again or View your stats", "Stats", "Restart");
+                if(restartView)
+                {
+                    //stats();
+                }
+                else
+                {
+                    ResetGame();
+                }
             }
             //change backgorund colors of frame depending on level of correctness
             else
@@ -243,6 +251,13 @@ private void CreateTheGrid()
                             .First(frame => Grid.GetRow(frame) == i && frame.Content is Label label && label.Text == guessedLetter.ToString())
                             .BackgroundColor = Color.FromRgb(204,204,0);
                     }
+                    else
+                    {
+                        LetterCaptureGrid.Children
+                        .OfType<Frame>()
+                         .First(frame => Grid.GetRow(frame) == i && Grid.GetColumn(frame) == j)
+                         .BackgroundColor = Color.FromRgb(100,100,100);
+                    }
                 }
             }
         }
@@ -253,10 +268,6 @@ private void CreateTheGrid()
       
         await Navigation.PushAsync(new SettingsPage(set));
     }
-
-
-
-
     //Light and darkMode
     public bool theme = false;
     public bool gridColor = false;
@@ -289,8 +300,8 @@ private void CreateTheGrid()
                 }
                 else
                 {
-                    button.BackgroundColor = Color.FromRgb(255, 255, 255);
-                    button.TextColor = Color.FromRgb(0, 0, 0);
+                    button.BackgroundColor = Color.FromRgb(0, 0, 0);
+                    button.TextColor = Color.FromRgb(255, 255, 255);
                     button.BorderColor = Color.FromRgb(0, 0, 0);
                 }
             }
@@ -335,6 +346,44 @@ private void CreateTheGrid()
     {
         await Navigation.PushAsync(new HelpPage());
     }
+    //reset the gane
+    private void ResetGame()
+    {
+        // Clear the letter grid
+        foreach (View view in LetterCaptureGrid.Children)
+        {
+            if (view is Frame frame)
+            {
+                if (frame.Content is Label label)
+                {
+                    label.Text = null;
+                }
+                frame.Content = null;
+                if (theme)
+                { 
+                frame.BackgroundColor = Color.FromRgb(0, 0, 0);
+                }
+                else
+                {
+                 frame.BackgroundColor = Color.FromRgb(255, 255, 255);
+                }
+            }
+        }
+
+        // Reset the count
+        count = 0;
+
+        // Generate a new word
+        newWord = true;
+        WordofTheDay();
+        Keys.Children.Clear();
+        Keys.ColumnDefinitions.Clear();
+        Keys.RowDefinitions.Clear();
+        Keys.Clear();
+        // Enable the StartWordle button
+        StartWordle.SetValue(Button.IsEnabledProperty, true);
+    }
+
 }
 
 

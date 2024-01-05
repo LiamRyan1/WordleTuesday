@@ -6,43 +6,37 @@
 
     <ScrollView>
         <StackLayout Padding="20">
-
-            <!-- Title -->
             <Label Text="How To Play"
                    FontSize="24"
                    FontAttributes="Bold"
                    HorizontalOptions="CenterAndExpand"
                    Margin="0,20,0,20"/>
-
-            <!-- Instructions -->
-            <Label Text="Welcome to the Wordle game! Here's how to play:"
+            <Label Text="Welcome Wordle Tuesday The Game! Here's how to play:"
                    FontSize="18"
-                   HorizontalOptions="Start"
+                   HorizontalOptions="CenterAndExpand"
                    Margin="0,0,0,10"/>
-
-            <!-- List of instructions -->
             <StackLayout>
                 <Label Text="1. Guess the word based on the given clues."
                        FontSize="16"
-                       HorizontalOptions="Start"
+                       HorizontalOptions="CenterAndExpand"
                        Margin="0,0,0,5"/>
                 <Label Text="2. Enter your guess in the provided input field."
                        FontSize="16"
-                       HorizontalOptions="Start"
+                       HorizontalOptions="CenterAndExpand"
                        Margin="0,0,0,5"/>
-                <Label Text="3. Review the feedback for your guess."
+                <Label Text="3. The color of the tiles will change to show how close your guess was to the word.."
                        FontSize="16"
-                       HorizontalOptions="Start"
+                       HorizontalOptions="CenterAndExpand"
                        Margin="0,0,0,5"/>
-                <!-- Add more instructions as needed -->
+                <Label Text="4. You have 6 guesses use the feedback from the grid to narrow your guesses down!"
+                  FontSize="16"
+                     HorizontalOptions="CenterAndExpand"
+                      Margin="0,0,0,5"/>
             </StackLayout>
-
-            <!-- Additional information or tips -->
             <Label Text="For additional help or tips, visit the official Wordle website."
                    FontSize="16"
-                   HorizontalOptions="Start"
+                   HorizontalOptions="CenterAndExpand"
                    Margin="0,20,0,0"/>
-
         </StackLayout>
     </ScrollView>
 
