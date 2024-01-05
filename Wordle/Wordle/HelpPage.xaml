@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wordle.HelpPage"
+             Title="HelpPage">
+
+    <ScrollView>
+        <StackLayout Padding="20">
+
+            <!-- Title -->
+            <Label Text="How To Play"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="CenterAndExpand"
+                   Margin="0,20,0,20"/>
+
+            <!-- Instructions -->
+            <Label Text="Welcome to the Wordle game! Here's how to play:"
+                   FontSize="18"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,10"/>
+
+            <!-- List of instructions -->
+            <StackLayout>
+                <Label Text="1. Guess the word based on the given clues."
+                       FontSize="16"
+                       HorizontalOptions="Start"
+                       Margin="0,0,0,5"/>
+                <Label Text="2. Enter your guess in the provided input field."
+                       FontSize="16"
+                       HorizontalOptions="Start"
+                       Margin="0,0,0,5"/>
+                <Label Text="3. Review the feedback for your guess."
+                       FontSize="16"
+                       HorizontalOptions="Start"
+                       Margin="0,0,0,5"/>
+                <!-- Add more instructions as needed -->
+            </StackLayout>
+
+            <!-- Additional information or tips -->
+            <Label Text="For additional help or tips, visit the official Wordle website."
+                   FontSize="16"
+                   HorizontalOptions="Start"
+                   Margin="0,20,0,0"/>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

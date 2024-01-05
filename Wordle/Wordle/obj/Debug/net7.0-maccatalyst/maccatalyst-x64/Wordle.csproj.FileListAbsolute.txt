@@ -263,3 +263,6 @@ C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Dev
 C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\Wordle.pdb
 C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\Wordle.genruntimeconfig.cache
 C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\ref\Wordle.dll
+C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\help.png
+C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\help@2x.png
+C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\help@3x.png

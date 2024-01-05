@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wordle.WelcomePage"
              Title="WelcomePage">
-    <ScrollView HorizontalOptions="Center" VerticalOptions="Center">
+    <ScrollView HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="{DynamicResource PrimaryColor}">
         <VerticalStackLayout Spacing="3">
             <Entry
                     x:Name="UsernameEntry"

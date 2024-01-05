@@ -3,6 +3,8 @@ using Microsoft.Maui.Controls;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Net;
+using System.Runtime.CompilerServices;
+
 namespace Wordle;
 
 public partial class MainPage : ContentPage
@@ -46,6 +48,7 @@ private void CreateTheGrid()
                 Frame styledFrame = new Frame
                 {
                     BorderColor = Color.FromRgb(50, 50, 50),
+                    BackgroundColor = Color.FromRgb(255,255,255),
                     CornerRadius = 10,
                     HasShadow = true,
                     Padding = new Thickness(10),
@@ -134,7 +137,6 @@ private void CreateTheGrid()
                     //vlaidates the word in the row once number of letters equals 5
                     validateWord();
                     count = 0;
-                    DisplayAlert("Button Clicked", $"random word is {WordofTheDay()}", "OK");
                 }
                 
             }
@@ -166,7 +168,7 @@ private void CreateTheGrid()
         }
     }
 
-
+    //get the random word from the list 
     public bool newWord = true;
     public string word;
     private string WordofTheDay()
@@ -178,7 +180,7 @@ private void CreateTheGrid()
         }
         return word;
     }
-
+    //check if guessed word is correct
     private void validateWord()
     {
         string wordOfTheDay = WordofTheDay().ToUpper(); //case insensitive comparison
@@ -239,7 +241,7 @@ private void CreateTheGrid()
                         LetterCaptureGrid.Children
                             .OfType<Frame>()
                             .First(frame => Grid.GetRow(frame) == i && frame.Content is Label label && label.Text == guessedLetter.ToString())
-                            .BackgroundColor = Color.FromRgb(255,255,153);
+                            .BackgroundColor = Color.FromRgb(204,204,0);
                     }
                 }
             }
@@ -257,85 +259,81 @@ private void CreateTheGrid()
 
     //Light and darkMode
     public bool theme = false;
+    public bool gridColor = false;
     private void OnStylingChanged(object sender, EventArgs e)
     {
-      
+        theme = false;
         UpdateButtonStyling();
         UpdateFrameStyling();
     }
     private void OnStylingChanged2(object sender, EventArgs e)
     {
 
-        UpdateButtonStyling2();
-        UpdateFrameStyling2();
+        theme = true;
+        UpdateButtonStyling();
+        UpdateFrameStyling();
+        
     }
     private void UpdateButtonStyling()
     {
-        theme = false;
+        
         foreach (View view in Keys.Children)
         {
             if (view is Button button)
             {
-                button.BackgroundColor = Color.FromRgb(255, 255, 255);
-                button.TextColor = Color.FromRgb(0, 0, 0);
-                button.BorderColor = Color.FromRgb(0, 0, 0);
+                if (theme)
+                {
+                    button.BorderColor = Color.FromRgb(255, 255, 255);
+                    button.BackgroundColor = Color.FromRgb(0, 0, 0);
+                    button.TextColor = Color.FromRgb(255, 255, 255);
+                }
+                else
+                {
+                    button.BackgroundColor = Color.FromRgb(255, 255, 255);
+                    button.TextColor = Color.FromRgb(0, 0, 0);
+                    button.BorderColor = Color.FromRgb(0, 0, 0);
+                }
             }
         }
     }
-    private void UpdateButtonStyling2()
-    {
-        theme = true;
-        foreach (View view in Keys.Children)
-        {
-            if (view is Button button)
-            {
-                button.BorderColor = Color.FromRgb(255, 255, 255);
-                button.BackgroundColor = Color.FromRgb(0, 0, 0);
-                button.TextColor = Color.FromRgb(255, 255, 255);
-            }
-        }
-    }
+
     private void UpdateFrameStyling()
     {
-       
         foreach (View view in LetterCaptureGrid.Children)
         {
             if (view is Frame frame)
             {
-                frame.BorderColor = Color.FromRgb(0, 0, 0);
-                if (frame.BackgroundColor != Color.FromRgb(34, 139, 34) || frame.BackgroundColor != Color.FromRgb(255, 255, 153))
+                if (theme)
                 {
-                    frame.BackgroundColor = Color.FromRgb(255, 255, 255);
-                
+                    frame.BorderColor = Color.FromRgb(255, 255, 255);
+                    if (frame.BackgroundColor.Equals(Color.FromRgb(255, 255, 255)) )
+                    {
+                        frame.BackgroundColor = Color.FromRgb(0, 0, 0);
+                    }
+                    if (frame.Content is Label label)
+                    {
+                        label.TextColor = Color.FromRgb(255, 255, 255);
+                    }
                 }
-               if (frame.Content is Label label)
+                else
                 {
-                    label.TextColor = Color.FromRgb(0, 0, 0);
+                    frame.BorderColor = Color.FromRgb(0, 0, 0);
+                    if (frame.BackgroundColor.Equals(Color.FromRgb(0, 0, 0)))
+                    {
+                        frame.BackgroundColor = Color.FromRgb(255, 255, 255);
+                    }
+                    if (frame.Content is Label label)
+                    {
+                        label.TextColor = Color.FromRgb(0, 0, 0);
+                    }
                 }
             }
         }
-
     }
-    private void UpdateFrameStyling2()
+    //go to help page
+    private async void Help_Clicked(object sender, EventArgs e)
     {
-        
-        foreach (View view in LetterCaptureGrid.Children)
-        {
-            if (view is Frame frame)
-            {
-                
-                frame.BorderColor = Color.FromRgb(255, 255, 255);
-                if (frame.BackgroundColor != Color.FromRgb(34, 139, 34) || frame.BackgroundColor != Color.FromRgb(255, 255, 153))
-                {
-                    frame.BackgroundColor = Color.FromRgb(0, 0, 0);
-                }
-
-                if (frame.Content is Label label)
-                {
-                    label.TextColor = Color.FromRgb(255, 255, 255);
-                }
-            }
-        }
+        await Navigation.PushAsync(new HelpPage());
     }
 }
 

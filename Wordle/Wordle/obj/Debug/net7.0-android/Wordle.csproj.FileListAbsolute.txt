@@ -515,3 +515,8 @@ C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Dev
 C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-android\resizetizer\r\drawable-xxhdpi\settingsdark.png
 C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\settings.png
 C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\settingsdark.png
+C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-android\resizetizer\r\drawable-hdpi\help.png
+C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-android\resizetizer\r\drawable-mdpi\help.png
+C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-android\resizetizer\r\drawable-xhdpi\help.png
+C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-android\resizetizer\r\drawable-xxhdpi\help.png
+C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\help.png
