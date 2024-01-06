@@ -128,30 +128,29 @@ public partial class MainPage : ContentPage
                 deleteLastLetter();
                 count--;
             }
-            else if(button.Text == "submit")
+            else if(button.Text == "submit" && count >= 5)
             {
-
+                validateWord();
+                count = 0;
             }
             else if(button.Text == "exit")
             {
-
                 sendToWelcomePage();
-                 
-                
             }
             // Update the content of the first empty frame in the letter grid
             else
             {
-                addLetter(letter);
-                //keep count of how many letters have been added to the grid
-                count++;
-                if (count == 5)
+                //keep count of how many letters have been added to the gri
+               if(count < 5)
                 {
-                    //vlaidates the word in the row once number of letters equals 5
-                    validateWord();
-                    count = 0;
+                    addLetter(letter);
                 }
-
+               else
+                {
+                    DisplayAlert("Button Clicked", $"The row is full please submit", "OK");
+                    count--;
+                }
+                count++;
             }
         }
     }
