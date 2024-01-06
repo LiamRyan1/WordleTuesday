@@ -55,6 +55,10 @@ namespace Wordle
             int which = random.Next(words.Count);
             return words[which];
         }
+        public bool WordExists(string wordToCheck)
+        {
+            return words.Contains(wordToCheck.ToLower());
+        }
     }
 }
     

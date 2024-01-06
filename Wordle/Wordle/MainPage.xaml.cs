@@ -174,7 +174,7 @@ public partial class MainPage : ContentPage
             word = list.GenerateRandomWord();
             newWord = false;
         }
-        return "donal";
+        return word;
     }
     //check if guessed word is correct
     private async void validateWord()
@@ -200,117 +200,22 @@ public partial class MainPage : ContentPage
             }
 
             string playerWord = guessedWord.ToString().ToUpper();
-
-            //Compare the row content with the Word of the Day
-            if (playerWord.Equals(wordOfTheDay, StringComparison.OrdinalIgnoreCase))
+            if (list.WordExists(playerWord))
             {
-                for (int j = 0; j < playerWord.Length; j++)
-                {
-                    char guessedLetter = playerWord[j];
-                    // Player guessed correctly
-                    LetterCaptureGrid.Children
-                              .OfType<Frame>()
-                              .First(frame => Grid.GetRow(frame) == i && frame.Content is Label label && label.Text == guessedLetter.ToString())
-                              .BackgroundColor = Color.FromRgb(34, 139, 34);
-                }
-                await DisplayAlert("Congratulations!", "You guessed correctly!", "OK");
-                bool restartView = await DisplayAlert("Question?", "Would you like to play again or View your stats", "Stats", "Restart");
-                if (restartView)
-                {
-                    //stats();
-                }
-                else
-                {
-                    ResetGame();
-                }
-            }
-            //change backgorund colors of frame depending on level of correctness
-            else
-            {
-                Dictionary<char, List<Frame>> correctOccurrences = new Dictionary<char, List<Frame>>();
-                Dictionary<char, List<Frame>> incorrectOccurrences = new Dictionary<char, List<Frame>>();
 
-                for (int j = 0; j < playerWord.Length; j++)
+                //Compare the row content with the Word of the Day
+                if (playerWord.Equals(wordOfTheDay, StringComparison.OrdinalIgnoreCase))
                 {
-                    char guessedLetter = playerWord[j];
-                    char actualLetter = wordOfTheDay[j];
-
-                    // Initialize dictionaries if not already present
-                    correctOccurrences.TryAdd(guessedLetter, new List<Frame>());
-                    incorrectOccurrences.TryAdd(guessedLetter, new List<Frame>());
-
-                    // Check if the guessed letter is the same as the actual letter in the correct position
-                    if (guessedLetter == actualLetter)
+                    for (int j = 0; j < playerWord.Length; j++)
                     {
-                        var frame = LetterCaptureGrid.Children
-                            .OfType<Frame>()
-                            .First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j);
-
-                        // Clear the incorrect occurrences for this letter
-                        foreach (var previousIncorrectFrame in incorrectOccurrences[guessedLetter])
-                        {
-                            previousIncorrectFrame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
-                        }
-                        incorrectOccurrences[guessedLetter].Clear();
-
-                        // Highlight the current letter as green
-                        frame.BackgroundColor = Color.FromRgb(34, 139, 34); // Highlight green
-
-                        // Add the frame to correct occurrences
-                        correctOccurrences[guessedLetter].Add(frame);
+                        char guessedLetter = playerWord[j];
+                        //player guessed correctly
+                        LetterCaptureGrid.Children
+                                  .OfType<Frame>()
+                                  .First(frame => Grid.GetRow(frame) == i && frame.Content is Label label && label.Text == guessedLetter.ToString())
+                                  .BackgroundColor = Color.FromRgb(34, 139, 34);
                     }
-                    // Check if the guessed letter is correct but in the wrong position
-                    else if (wordOfTheDay.Contains(guessedLetter))
-                    {
-                        var frames = LetterCaptureGrid.Children
-                            .OfType<Frame>()
-                            .Where(f => Grid.GetRow(f) == i && f.Content is Label label && label.Text == guessedLetter.ToString())
-                            .ToList();
-
-                        if (frames.Count > 1 || !correctOccurrences[guessedLetter].Any())
-                        {
-                            foreach (var frame in frames)
-                            {
-                                // Exclude frames already marked as correct (green)
-                                if (!correctOccurrences[guessedLetter].Contains(frame))
-                                {
-                                    // Highlight the letter as yellow if not in incorrect occurrences
-                                    if (!incorrectOccurrences[guessedLetter].Contains(frame))
-                                    {
-                                        frame.BackgroundColor = Color.FromRgb(204, 204, 0); // Highlight yellow
-
-                                        // Add the frame to incorrect occurrences
-                                        incorrectOccurrences[guessedLetter].Add(frame);
-                                    }
-                                    else
-                                    {
-                                        frame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // If there's only one occurrence and it's correct, highlight it as gray
-                            frames.First().BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
-                        }
-                    }
-                    else
-                    {
-                        // Guessed letter is not contained within the word of the day
-                        var frame = LetterCaptureGrid.Children
-                            .OfType<Frame>()
-                            .First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j);
-
-                        // Highlight the letter as gray
-                        frame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
-                    }
-                }
-
-                //reset the game      
-                if (i == LastRowIndex && playerWord.Length > 0 && !playerWord.Equals(wordOfTheDay, StringComparison.OrdinalIgnoreCase))
-                {
-                    await DisplayAlert("Oh No!", $"You Ran out of Guesses! the correct Word was : {wordOfTheDay} ", "OK");
+                    await DisplayAlert("Congratulations!", "You guessed correctly!", "OK");
                     bool restartView = await DisplayAlert("Question?", "Would you like to play again or View your stats", "Stats", "Restart");
                     if (restartView)
                     {
@@ -321,9 +226,137 @@ public partial class MainPage : ContentPage
                         ResetGame();
                     }
                 }
-            } 
+                //change backgorund colors of frame depending on level of correctness
+                else
+                {
+                    //keeps track of how many times the letter occurs
+                    Dictionary<char, List<Frame>> correctOccurrences = new Dictionary<char, List<Frame>>();
+                    Dictionary<char, List<Frame>> incorrectOccurrences = new Dictionary<char, List<Frame>>();
+
+                    for (int j = 0; j < playerWord.Length; j++)
+                    {
+                        char guessedLetter = playerWord[j];
+                        char actualLetter = wordOfTheDay[j];
+
+                        //initialize dictionaries if not already present
+                        correctOccurrences.TryAdd(guessedLetter, new List<Frame>());
+                        incorrectOccurrences.TryAdd(guessedLetter, new List<Frame>());
+
+                        //check if the guessed letter is the same as the actual letter in the correct position
+                        if (guessedLetter == actualLetter)
+                        {
+                            var frame = LetterCaptureGrid.Children
+                                .OfType<Frame>()
+                                .First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j);
+
+                            //clear the incorrect occurrences for this letter
+                            foreach (var previousIncorrectFrame in incorrectOccurrences[guessedLetter])
+                            {
+                                previousIncorrectFrame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
+                            }
+                            incorrectOccurrences[guessedLetter].Clear();
+
+                            //highlight the current letter as green
+                            frame.BackgroundColor = Color.FromRgb(34, 139, 34); // Highlight green
+
+                            //add the frame to correct occurrences
+                            correctOccurrences[guessedLetter].Add(frame);
+                        }
+                        //check if the guessed letter is correct but in the wrong position
+                        else if (wordOfTheDay.Contains(guessedLetter))
+                        {
+                            var frames = LetterCaptureGrid.Children
+                                .OfType<Frame>()
+                                .Where(f => Grid.GetRow(f) == i && f.Content is Label label && label.Text == guessedLetter.ToString())
+                                .ToList();
+
+                            if (frames.Count > 1 || !correctOccurrences[guessedLetter].Any())
+                            {
+                                foreach (var frame in frames)
+                                {
+                                    //exclude frames already marked as correct (green)
+                                    if (!correctOccurrences[guessedLetter].Contains(frame))
+                                    {
+                                        //highlight the letter as yellow if not in incorrect occurrences
+                                        if (!incorrectOccurrences[guessedLetter].Contains(frame))
+                                        {
+                                            frame.BackgroundColor = Color.FromRgb(204, 204, 0); //highlight yellow
+
+                                            //add the frame to incorrect occurrences
+                                            incorrectOccurrences[guessedLetter].Add(frame);
+                                        }
+                                        else
+                                        {
+                                            frame.BackgroundColor = Color.FromRgb(100, 100, 100); //highlight gray
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                //if there's only one occurrence and it's correct, highlight it as gray
+                                frames.First().BackgroundColor = Color.FromRgb(100, 100, 100);
+                            }
+                        }
+                        else
+                        {
+                            //Guessed letter is not contained within the word of the day
+                            var frame = LetterCaptureGrid.Children
+                                .OfType<Frame>()
+                                .First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j);               
+                            //highlight gray
+                            frame.BackgroundColor = Color.FromRgb(100, 100, 100);
+                        }
+                    }
+
+                    //reset the game      
+                    if (i == LastRowIndex && playerWord.Length > 0 && !playerWord.Equals(wordOfTheDay, StringComparison.OrdinalIgnoreCase))
+                    {
+                        await DisplayAlert("Oh No!", $"You Ran out of Guesses! the correct Word was : {wordOfTheDay} ", "OK");
+                        bool restartView = await DisplayAlert("Question?", "Would you like to play again or View your stats", "Stats", "Restart");
+                        if (restartView)
+                        {
+                            //stats();
+                        }
+                        else
+                        {
+                            ResetGame();
+                        }
+                    }            
+                }
+            }
+            else
+            {
+                foreach (View view in LetterCaptureGrid.Children
+                 .OfType<Frame>()
+                 .Where(frame => Grid.GetRow(frame) == i && frame.Content != null))
+                {
+                    if (view is Frame frame)
+                    {
+                        if (frame.Content is Label label)
+                        {
+                            label.Text = string.Empty;
+                        }
+                        frame.Content = null;
+                    }
+                }
+
+                // Find the first Frame in the recently cleared row and set focus
+                var firstFrameInRow = LetterCaptureGrid.Children
+                    .OfType<Frame>()
+                    .FirstOrDefault(frame => Grid.GetRow(frame) == i);
+
+                if (firstFrameInRow != null)
+                {
+                    // Set focus to the first Frame in the row
+                    // Adjust this based on your actual application structure
+                    // For example, if you have an Entry inside the Frame, you'd set focus to the Entry.
+                    firstFrameInRow.Focus();
+                }
+            }
         }
     }
+
     //send to settings page
     private async void Settings_Clicked(object sender, EventArgs e)
     {
@@ -411,7 +444,7 @@ public partial class MainPage : ContentPage
     //reset the gane
     private void ResetGame()
     {
-        // Clear the letter grid
+        //clear the letter grid
         foreach (View view in LetterCaptureGrid.Children)
         {
             if (view is Frame frame)
@@ -432,17 +465,18 @@ public partial class MainPage : ContentPage
             }
         }
 
-        // Reset the count
+        //reset the count
         count = 0;
 
-        // Generate a new word
+        //generate new word
         newWord = true;
         WordofTheDay();
+        //clear on screen keyboard
         Keys.Children.Clear();
         Keys.ColumnDefinitions.Clear();
         Keys.RowDefinitions.Clear();
         Keys.Clear();
-        // Enable the StartWordle button
+        //enable begin button
         StartWordle.SetValue(Button.IsEnabledProperty, true);
     }
 
