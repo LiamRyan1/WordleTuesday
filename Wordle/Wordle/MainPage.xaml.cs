@@ -174,7 +174,7 @@ public partial class MainPage : ContentPage
             word = list.GenerateRandomWord();
             newWord = false;
         }
-        return "dnnnn";
+        return "donal";
     }
     //check if guessed word is correct
     private async void validateWord()
@@ -267,17 +267,32 @@ public partial class MainPage : ContentPage
                             .Where(f => Grid.GetRow(f) == i && f.Content is Label label && label.Text == guessedLetter.ToString())
                             .ToList();
 
-                        foreach (var frame in frames)
+                        if (frames.Count > 1 || !correctOccurrences[guessedLetter].Any())
                         {
-                            // Exclude frames already marked as correct (green)
-                            if (!correctOccurrences[guessedLetter].Contains(frame))
+                            foreach (var frame in frames)
                             {
-                                // Highlight the letter as yellow
-                                frame.BackgroundColor = Color.FromRgb(204, 204, 0); // Highlight yellow
+                                // Exclude frames already marked as correct (green)
+                                if (!correctOccurrences[guessedLetter].Contains(frame))
+                                {
+                                    // Highlight the letter as yellow if not in incorrect occurrences
+                                    if (!incorrectOccurrences[guessedLetter].Contains(frame))
+                                    {
+                                        frame.BackgroundColor = Color.FromRgb(204, 204, 0); // Highlight yellow
 
-                                // Add the frame to incorrect occurrences
-                                incorrectOccurrences[guessedLetter].Add(frame);
+                                        // Add the frame to incorrect occurrences
+                                        incorrectOccurrences[guessedLetter].Add(frame);
+                                    }
+                                    else
+                                    {
+                                        frame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
+                                    }
+                                }
                             }
+                        }
+                        else
+                        {
+                            // If there's only one occurrence and it's correct, highlight it as gray
+                            frames.First().BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
                         }
                     }
                     else
@@ -291,6 +306,7 @@ public partial class MainPage : ContentPage
                         frame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
                     }
                 }
+
                 //reset the game      
                 if (i == LastRowIndex && playerWord.Length > 0 && !playerWord.Equals(wordOfTheDay, StringComparison.OrdinalIgnoreCase))
                 {
