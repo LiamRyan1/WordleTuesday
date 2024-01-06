@@ -174,7 +174,7 @@ public partial class MainPage : ContentPage
             word = list.GenerateRandomWord();
             newWord = false;
         }
-        return "donal";
+        return "dnnnn";
     }
     //check if guessed word is correct
     private async void validateWord()
@@ -227,10 +227,17 @@ public partial class MainPage : ContentPage
             //change backgorund colors of frame depending on level of correctness
             else
             {
+                Dictionary<char, List<Frame>> correctOccurrences = new Dictionary<char, List<Frame>>();
+                Dictionary<char, List<Frame>> incorrectOccurrences = new Dictionary<char, List<Frame>>();
+
                 for (int j = 0; j < playerWord.Length; j++)
                 {
                     char guessedLetter = playerWord[j];
                     char actualLetter = wordOfTheDay[j];
+
+                    // Initialize dictionaries if not already present
+                    correctOccurrences.TryAdd(guessedLetter, new List<Frame>());
+                    incorrectOccurrences.TryAdd(guessedLetter, new List<Frame>());
 
                     // Check if the guessed letter is the same as the actual letter in the correct position
                     if (guessedLetter == actualLetter)
@@ -239,24 +246,39 @@ public partial class MainPage : ContentPage
                             .OfType<Frame>()
                             .First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j);
 
-                        // Highlight green only if it's the first occurrence of the guessed letter in the word
-                        if (wordOfTheDay.Count(c => c == guessedLetter) == 1)
+                        // Clear the incorrect occurrences for this letter
+                        foreach (var previousIncorrectFrame in incorrectOccurrences[guessedLetter])
                         {
-                            frame.BackgroundColor = Color.FromRgb(34, 139, 34);
+                            previousIncorrectFrame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
                         }
-                        else
-                        {
-                            frame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray if not the first occurrence
-                        }
+                        incorrectOccurrences[guessedLetter].Clear();
+
+                        // Highlight the current letter as green
+                        frame.BackgroundColor = Color.FromRgb(34, 139, 34); // Highlight green
+
+                        // Add the frame to correct occurrences
+                        correctOccurrences[guessedLetter].Add(frame);
                     }
                     // Check if the guessed letter is correct but in the wrong position
                     else if (wordOfTheDay.Contains(guessedLetter))
                     {
-                        var frame = LetterCaptureGrid.Children
+                        var frames = LetterCaptureGrid.Children
                             .OfType<Frame>()
-                            .First(f => Grid.GetRow(f) == i && f.Content is Label label && label.Text == guessedLetter.ToString());
+                            .Where(f => Grid.GetRow(f) == i && f.Content is Label label && label.Text == guessedLetter.ToString())
+                            .ToList();
 
-                        frame.BackgroundColor = Color.FromRgb(204, 204, 0); // Highlight yellow
+                        foreach (var frame in frames)
+                        {
+                            // Exclude frames already marked as correct (green)
+                            if (!correctOccurrences[guessedLetter].Contains(frame))
+                            {
+                                // Highlight the letter as yellow
+                                frame.BackgroundColor = Color.FromRgb(204, 204, 0); // Highlight yellow
+
+                                // Add the frame to incorrect occurrences
+                                incorrectOccurrences[guessedLetter].Add(frame);
+                            }
+                        }
                     }
                     else
                     {
@@ -265,10 +287,10 @@ public partial class MainPage : ContentPage
                             .OfType<Frame>()
                             .First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j);
 
+                        // Highlight the letter as gray
                         frame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
                     }
                 }
-
                 //reset the game      
                 if (i == LastRowIndex && playerWord.Length > 0 && !playerWord.Equals(wordOfTheDay, StringComparison.OrdinalIgnoreCase))
                 {
