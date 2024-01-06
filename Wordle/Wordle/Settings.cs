@@ -13,15 +13,13 @@ namespace Wordle
         public void lightmode()
         {
             Application.Current.Resources["PrimaryColor"] = Color.FromRgb(255, 255, 255);
-            Application.Current.Resources["SecondaryColor"] = Color.FromRgb(100, 100, 100);
-            Application.Current.Resources["ThirdColor"] = Color.FromRgb(0, 0, 0);
+            Application.Current.Resources["SecondaryColor"] = Color.FromRgb(0, 0, 0);
             OnStylingChanged();
         }
         public void darkmode()
         {
             Application.Current.Resources["PrimaryColor"] = Color.FromRgb(0, 0, 0);
-            Application.Current.Resources["SecondaryColor"] = Color.FromRgb(100, 100, 100);
-            Application.Current.Resources["ThirdColor"] = Color.FromRgb(255, 255, 255);
+            Application.Current.Resources["SecondaryColor"] = Color.FromRgb(255, 255, 255);
             OnStylingChanged2();
         }
         protected virtual void OnStylingChanged()

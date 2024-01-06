@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wordle.HelpPage"
-             Title="HelpPage">
+             Title="HelpPage" BackgroundColor="{DynamicResource PrimaryColor}">
 
     <ScrollView>
         <StackLayout Padding="20">
@@ -10,33 +10,40 @@
                    FontSize="24"
                    FontAttributes="Bold"
                    HorizontalOptions="CenterAndExpand"
-                   Margin="0,20,0,20"/>
+                   Margin="0,20,0,20"
+                    TextColor="{DynamicResource SecondaryColor}"/>
             <Label Text="Welcome Wordle Tuesday The Game! Here's how to play:"
                    FontSize="18"
                    HorizontalOptions="CenterAndExpand"
-                   Margin="0,0,0,10"/>
+                   Margin="0,0,0,10"
+                    TextColor="{DynamicResource SecondaryColor}"/>
             <StackLayout>
                 <Label Text="1. Guess the word based on the given clues."
                        FontSize="16"
                        HorizontalOptions="CenterAndExpand"
-                       Margin="0,0,0,5"/>
+                       Margin="0,0,0,5"
+                       TextColor="{DynamicResource SecondaryColor}"/>
                 <Label Text="2. Enter your guess in the provided input field."
                        FontSize="16"
                        HorizontalOptions="CenterAndExpand"
-                       Margin="0,0,0,5"/>
+                       Margin="0,0,0,5"
+                       TextColor="{DynamicResource SecondaryColor}"/>
                 <Label Text="3. The color of the tiles will change to show how close your guess was to the word.."
                        FontSize="16"
                        HorizontalOptions="CenterAndExpand"
-                       Margin="0,0,0,5"/>
+                       Margin="0,0,0,5"
+                        TextColor="{DynamicResource SecondaryColor}"/>
                 <Label Text="4. You have 6 guesses use the feedback from the grid to narrow your guesses down!"
                   FontSize="16"
                      HorizontalOptions="CenterAndExpand"
-                      Margin="0,0,0,5"/>
+                      Margin="0,0,0,5"
+                        TextColor="{DynamicResource SecondaryColor}"/>
             </StackLayout>
             <Label Text="For additional help or tips, visit the official Wordle website."
                    FontSize="16"
                    HorizontalOptions="CenterAndExpand"
-                   Margin="0,20,0,0"/>
+                   Margin="0,20,0,0"
+                    TextColor="{DynamicResource SecondaryColor}"/>
         </StackLayout>
     </ScrollView>
 

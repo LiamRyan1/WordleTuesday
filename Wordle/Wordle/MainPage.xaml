@@ -5,7 +5,7 @@
              Title="Wordle Tuesday">
     <ContentPage.ToolbarItems>
         <ToolbarItem  IconImageSource="help.png" Clicked="Help_Clicked"/>
-        <ToolbarItem  IconImageSource="{AppThemeBinding Light=settings.png, Dark=settingsdark.png}"  Clicked="Settings_Clicked"/>
+        <ToolbarItem  IconImageSource="settings.png"  Clicked="Settings_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>

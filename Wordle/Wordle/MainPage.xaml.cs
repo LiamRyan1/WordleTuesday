@@ -90,6 +90,7 @@ public partial class MainPage : ContentPage
         {
             Text = GetButtonText(row, column),
             BackgroundColor = Color.FromRgb(0, 0, 0),
+            BorderColor = Color.FromRgb(255, 255,255),
         };
         buttons.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Button)) * 0.8;
 
@@ -104,7 +105,7 @@ public partial class MainPage : ContentPage
         {
             {"Q","W","E","R","T","Y","U","I","O","P"},
             {"A","S","D","F","G","H","J","K","L",""},
-            { "Z","X","C","V","B","N","M","","",""}
+            { "Z","X","C","V","B","N","M","delete","submit","exit"}
         };
 
         return Letter[row, column];
@@ -122,6 +123,22 @@ public partial class MainPage : ContentPage
             {
                 DisplayAlert("Button Clicked", $"You clicked button is empty", "OK");
             }
+            else if(button.Text == "delete")
+            {
+                deleteLastLetter();
+                count--;
+            }
+            else if(button.Text == "submit")
+            {
+
+            }
+            else if(button.Text == "exit")
+            {
+
+                sendToWelcomePage();
+                 
+                
+            }
             // Update the content of the first empty frame in the letter grid
             else
             {
@@ -138,6 +155,32 @@ public partial class MainPage : ContentPage
             }
         }
     }
+   private void deleteLastLetter()
+   {
+       // Find the last frame with a letter
+       Frame lastFrame = null;
+
+       foreach (Frame frame in LetterCaptureGrid.Children.OfType<Frame>().Where(f => f.Content is Label))
+       {
+           lastFrame = frame;
+       }
+
+       if (lastFrame != null && lastFrame.Content is Label label)
+       {
+          
+           label.Text = string.Empty;
+
+        
+           lastFrame.Content = null;
+
+          
+           lastFrame.Focus();
+       }
+   }
+
+    
+
+
     private void addLetter(string letter)
     {
         //goes through all Views in the lettercapture grid
@@ -327,9 +370,7 @@ public partial class MainPage : ContentPage
             }
             else
             {
-                foreach (View view in LetterCaptureGrid.Children
-                 .OfType<Frame>()
-                 .Where(frame => Grid.GetRow(frame) == i && frame.Content != null))
+                foreach (View view in LetterCaptureGrid.Children.OfType<Frame>() .Where(frame => Grid.GetRow(frame) == i && frame.Content != null))
                 {
                     if (view is Frame frame)
                     {
@@ -340,17 +381,12 @@ public partial class MainPage : ContentPage
                         frame.Content = null;
                     }
                 }
-
-                // Find the first Frame in the recently cleared row and set focus
                 var firstFrameInRow = LetterCaptureGrid.Children
                     .OfType<Frame>()
                     .FirstOrDefault(frame => Grid.GetRow(frame) == i);
 
                 if (firstFrameInRow != null)
                 {
-                    // Set focus to the first Frame in the row
-                    // Adjust this based on your actual application structure
-                    // For example, if you have an Entry inside the Frame, you'd set focus to the Entry.
                     firstFrameInRow.Focus();
                 }
             }
@@ -440,6 +476,10 @@ public partial class MainPage : ContentPage
     private async void Help_Clicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new HelpPage());
+    }
+    private async void sendToWelcomePage()
+    {
+        await Shell.Current.GoToAsync("//WelcomePage", true);
     }
     //reset the gane
     private void ResetGame()

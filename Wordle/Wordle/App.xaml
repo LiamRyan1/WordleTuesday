@@ -10,8 +10,8 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Color x:Key="PrimaryColor">White</Color>
-            <Color x:Key="SecondaryColor">darkGray</Color>
-            <Color x:Key="ThirdColor">Black</Color>
+            <Color x:Key="SecondaryColor">Black</Color>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
