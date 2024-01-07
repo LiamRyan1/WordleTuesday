@@ -1,3 +1,4 @@
+using static Wordle.WelcomePage;
 namespace Wordle;
 
 public partial class SettingsPage : ContentPage
@@ -8,6 +9,8 @@ public partial class SettingsPage : ContentPage
         set = s;
         InitializeComponent();
         BindingContext = set;
+        string text ="User: " + Username.username;
+        StoredText.Text = text;
     }
 
     private async void SaveSettingsBtn_Clicked(object sender, EventArgs e)

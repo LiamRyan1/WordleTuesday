@@ -2,24 +2,44 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wordle.WelcomePage"
-             Title="WelcomePage" BackgroundColor="{DynamicResource PrimaryColor}">
-    <ScrollView HorizontalOptions="Center" VerticalOptions="Center">
-        <VerticalStackLayout Spacing="3">
-            <Entry
+      Title="WelcomePage" BackgroundColor="{DynamicResource PrimaryColor}">
+    <Grid>
+        <Image Source="welcomebackground.png" Aspect="AspectFill" Opacity="0.4"/>
+        <ScrollView HorizontalOptions="Center" VerticalOptions="Center">
+            <VerticalStackLayout Spacing="3" >
+                <Label 
+                Text ="Welcome to Wordle"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontSize="Title" 
+                  FontAttributes="Bold, Italic"
+                    FontFamily="timesNewRoman"
+                TextColor="{DynamicResource SecondaryColor}"/>
+                <Label 
+                Text ="Please Enter a username:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontSize="24" 
+                  FontAttributes="Bold"
+                    FontFamily="timesNewRoman"
+                TextColor="{DynamicResource SecondaryColor}"/>
+                <Entry
                     x:Name="UsernameEntry"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Placeholder="Username" 
-                 TextColor="{DynamicResource SecondaryColor}"/>
+                 TextColor="{DynamicResource SecondaryColor}"
+                    BackgroundColor="{DynamicResource PrimaryColor}"/>
 
-            <Button
+                <Button
                     x:Name="LoginButton"
                     Margin="10,5"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Text="Login"
                     Clicked="PlayGame_Clicked">
-            </Button>
-        </VerticalStackLayout>
-    </ScrollView>
+                </Button>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

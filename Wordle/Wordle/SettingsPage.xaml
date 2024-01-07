@@ -3,12 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wordle.SettingsPage"
              Title="SettingsPage">
-    <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-        <Button Text="light" Clicked="LightMode_Clicked"  HorizontalOptions="Center" VerticalOptions="Center" Margin="10"/>
-        <Button Text="Dark" Clicked="Dark_Clicked"  HorizontalOptions="Center" VerticalOptions="Center" Margin="10"/>
-        <Label 
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button Text="Save" Clicked="SaveSettingsBtn_Clicked"  HorizontalOptions="Center" VerticalOptions="Center"/>
-    </VerticalStackLayout>
+    <Grid>
+       
+       <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
+            <Label 
+             Text ="Welcome to the SettingsPage"
+             VerticalOptions="Center" 
+             HorizontalOptions="Center"
+             FontSize="Title" 
+             TextColor="{DynamicResource SecondaryColor}"/>
+            <Label x:Name="StoredText"
+                 FontSize="24"
+                 VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                 Margin="0,20,0,20"
+               TextColor="{DynamicResource SecondaryColor}"/>
+            <Label 
+             Text="Themes"
+             HorizontalOptions="Center"
+             FontSize="Title" 
+             TextColor="{DynamicResource SecondaryColor}"/>
+            
+       
+                 <HorizontalStackLayout HorizontalOptions="Center">
+                      <Button Text="light" Clicked="LightMode_Clicked"  HorizontalOptions="Center" VerticalOptions="Center" Margin="10"/>
+                     <Button Text="Dark" Clicked="Dark_Clicked"  HorizontalOptions="Center" VerticalOptions="Center" Margin="10"/>
+                  </HorizontalStackLayout>
+             <VerticalStackLayout>
+                     <Button Text="Save" Clicked="SaveSettingsBtn_Clicked"  HorizontalOptions="Center" VerticalOptions="Center"/>
+              </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+
 </ContentPage>

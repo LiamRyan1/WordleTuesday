@@ -8,6 +8,11 @@ public partial class MainPage : ContentPage
 
     private Settings set;
     ListWords list;
+    public static int count = 0;
+    public bool newWord = true;
+    public string word;
+    public bool theme = false;
+    public bool gridColor = false;
     public MainPage()
     {
         InitializeComponent();
@@ -90,7 +95,7 @@ public partial class MainPage : ContentPage
         {
             Text = GetButtonText(row, column),
             BackgroundColor = Color.FromRgb(0, 0, 0),
-            BorderColor = Color.FromRgb(255, 255,255),
+            BorderColor = Color.FromRgb(255, 255, 255),
         };
         buttons.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Button)) * 0.8;
 
@@ -104,14 +109,12 @@ public partial class MainPage : ContentPage
         string[,] Letter = new string[,]
         {
             {"Q","W","E","R","T","Y","U","I","O","P"},
-            {"A","S","D","F","G","H","J","K","L",""},
+            {"A","S","D","F","G","H","J","K","L","Hint"},
             { "Z","X","C","V","B","N","M","delete","submit","exit"}
         };
 
         return Letter[row, column];
     }
-    //counter
-    public static int count = 0;
     private async void OnButtonClicked(object sender, EventArgs e)
     {
 
@@ -121,63 +124,73 @@ public partial class MainPage : ContentPage
             string letter = button.Text;
             if (button.Text == "")
             {
-                DisplayAlert("Button Clicked", $"You clicked button is empty", "OK");
+                await DisplayAlert("Button Clicked", $"You clicked button is empty", "OK");
             }
-            else if(button.Text == "delete")
+            else if (button.Text == "delete")
             {
                 deleteLastLetter();
                 count--;
             }
-            else if(button.Text == "submit" && count >= 5)
+            else if (button.Text == "submit" && count >= 5)
             {
                 validateWord();
                 count = 0;
             }
-            else if(button.Text == "exit")
+            else if (button.Text == "submit" && count < 5)
             {
+                await DisplayAlert("Button Clicked", $"The row is not full please fill the row before submitting submit", "OK");
+            }
+            else if (button.Text == "exit")
+            {
+                ResetGame();
                 sendToWelcomePage();
+            }
+            else if (button.Text == "Hint")
+            {
+                revealFirstAndLastLetter();
             }
             // Update the content of the first empty frame in the letter grid
             else
             {
                 //keep count of how many letters have been added to the gri
-               if(count < 5)
+                if (count < 5)
                 {
                     addLetter(letter);
+
                 }
-               else
+                else
                 {
-                    DisplayAlert("Button Clicked", $"The row is full please submit", "OK");
+                    await DisplayAlert("Button Clicked", $"The row is full please submit", "OK");
                     count--;
                 }
                 count++;
             }
         }
     }
-   private void deleteLastLetter()
-   {
-       // Find the last frame with a letter
-       Frame lastFrame = null;
+    private void deleteLastLetter()
+    {
+        // Find the last frame with a letter
+        Frame lastFrame = null;
 
-       foreach (Frame frame in LetterCaptureGrid.Children.OfType<Frame>().Where(f => f.Content is Label))
-       {
-           lastFrame = frame;
-       }
+        foreach (Frame frame in LetterCaptureGrid.Children.OfType<Frame>().Where(f => f.Content is Label))
+        {
+            lastFrame = frame;
+        }
 
-       if (lastFrame != null && lastFrame.Content is Label label)
-       {
-          
-           label.Text = string.Empty;
+        if (lastFrame != null && lastFrame.Content is Label label)
+        {
 
-        
-           lastFrame.Content = null;
+            label.Text = string.Empty;
 
-          
-           lastFrame.Focus();
-       }
-   }
 
-    
+            lastFrame.Content = null;
+
+
+            lastFrame.Focus();
+        }
+    }
+
+
 
 
     private void addLetter(string letter)
@@ -207,8 +220,6 @@ public partial class MainPage : ContentPage
     }
 
     //get the random word from the list 
-    public bool newWord = true;
-    public string word;
     private string WordofTheDay()
     {
         if (newWord == true)
@@ -258,10 +269,11 @@ public partial class MainPage : ContentPage
                                   .BackgroundColor = Color.FromRgb(34, 139, 34);
                     }
                     await DisplayAlert("Congratulations!", "You guessed correctly!", "OK");
-                    bool restartView = await DisplayAlert("Question?", "Would you like to play again or View your stats", "Stats", "Restart");
+                    bool restartView = await DisplayAlert("Question?", "Would you like to play again or return to welcomePage", "return", "Restart");
                     if (restartView)
                     {
-                        //stats();
+                        ResetGame();
+                        sendToWelcomePage();
                     }
                     else
                     {
@@ -271,7 +283,7 @@ public partial class MainPage : ContentPage
                 //change backgorund colors of frame depending on level of correctness
                 else
                 {
-                    //keeps track of how many times the letter occurs
+                    //keeps track of how many times the letter occurs in correct position and incorrect
                     Dictionary<char, List<Frame>> correctOccurrences = new Dictionary<char, List<Frame>>();
                     Dictionary<char, List<Frame>> incorrectOccurrences = new Dictionary<char, List<Frame>>();
 
@@ -280,7 +292,7 @@ public partial class MainPage : ContentPage
                         char guessedLetter = playerWord[j];
                         char actualLetter = wordOfTheDay[j];
 
-                        //initialize dictionaries if not already present
+                        //add every letter to the dictionairies
                         correctOccurrences.TryAdd(guessedLetter, new List<Frame>());
                         incorrectOccurrences.TryAdd(guessedLetter, new List<Frame>());
 
@@ -291,18 +303,19 @@ public partial class MainPage : ContentPage
                                 .OfType<Frame>()
                                 .First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j);
 
-                            //clear the incorrect occurrences for this letter
+                            //clear any previous incorrect position occurrences for this letter
                             foreach (var previousIncorrectFrame in incorrectOccurrences[guessedLetter])
                             {
-                                previousIncorrectFrame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
+                                previousIncorrectFrame.BackgroundColor = Color.FromRgb(100, 100, 100); //highlight gray
                             }
                             incorrectOccurrences[guessedLetter].Clear();
 
-                            //highlight the current letter as green
+                            //highlight the correct position letter as green
                             frame.BackgroundColor = Color.FromRgb(34, 139, 34); // Highlight green
 
-                            //add the frame to correct occurrences
+                            //add the frame to correct occurrences dictionary
                             correctOccurrences[guessedLetter].Add(frame);
+
                         }
                         //check if the guessed letter is correct but in the wrong position
                         else if (wordOfTheDay.Contains(guessedLetter))
@@ -330,6 +343,7 @@ public partial class MainPage : ContentPage
                                         else
                                         {
                                             frame.BackgroundColor = Color.FromRgb(100, 100, 100); //highlight gray
+
                                         }
                                     }
                                 }
@@ -338,6 +352,7 @@ public partial class MainPage : ContentPage
                             {
                                 //if there's only one occurrence and it's correct, highlight it as gray
                                 frames.First().BackgroundColor = Color.FromRgb(100, 100, 100);
+
                             }
                         }
                         else
@@ -345,9 +360,11 @@ public partial class MainPage : ContentPage
                             //Guessed letter is not contained within the word of the day
                             var frame = LetterCaptureGrid.Children
                                 .OfType<Frame>()
-                                .First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j);               
+                                .First(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j);
                             //highlight gray
                             frame.BackgroundColor = Color.FromRgb(100, 100, 100);
+
+
                         }
                     }
 
@@ -355,21 +372,22 @@ public partial class MainPage : ContentPage
                     if (i == LastRowIndex && playerWord.Length > 0 && !playerWord.Equals(wordOfTheDay, StringComparison.OrdinalIgnoreCase))
                     {
                         await DisplayAlert("Oh No!", $"You Ran out of Guesses! the correct Word was : {wordOfTheDay} ", "OK");
-                        bool restartView = await DisplayAlert("Question?", "Would you like to play again or View your stats", "Stats", "Restart");
+                        bool restartView = await DisplayAlert("Question?", "Would you like to play again or return to welcome page", "return", "Restart");
                         if (restartView)
                         {
-                            //stats();
+                            ResetGame();
+                            sendToWelcomePage();
                         }
                         else
                         {
                             ResetGame();
                         }
-                    }            
+                    }
                 }
             }
             else
             {
-                foreach (View view in LetterCaptureGrid.Children.OfType<Frame>() .Where(frame => Grid.GetRow(frame) == i && frame.Content != null))
+                foreach (View view in LetterCaptureGrid.Children.OfType<Frame>().Where(frame => Grid.GetRow(frame) == i && frame.Content != null))
                 {
                     if (view is Frame frame)
                     {
@@ -399,8 +417,6 @@ public partial class MainPage : ContentPage
         await Navigation.PushAsync(new SettingsPage(set));
     }
     //Light and darkMode
-    public bool theme = false;
-    public bool gridColor = false;
     private void OnStylingChanged(object sender, EventArgs e)
     {
         theme = false;
@@ -425,12 +441,11 @@ public partial class MainPage : ContentPage
                 if (theme)
                 {
                     button.BorderColor = Color.FromRgb(255, 255, 255);
-                    button.BackgroundColor = Color.FromRgb(0, 0, 0);
                     button.TextColor = Color.FromRgb(255, 255, 255);
                 }
                 else
                 {
-                    button.BackgroundColor = Color.FromRgb(0, 0, 0);
+
                     button.TextColor = Color.FromRgb(255, 255, 255);
                     button.BorderColor = Color.FromRgb(0, 0, 0);
                 }
@@ -518,7 +533,16 @@ public partial class MainPage : ContentPage
         //enable begin button
         StartWordle.SetValue(Button.IsEnabledProperty, true);
     }
+    //hint
+    private async void revealFirstAndLastLetter()
+    {
+            char firstLetter = word[0];
+            char lastLetter = word[word.Length - 1];
 
+            string alertMessage = $"The first letter is: {firstLetter}\nThe last letter is: {lastLetter}";
+
+            // Display the alert with the hint
+           
+              await DisplayAlert("Hint", alertMessage, "OK");
+    }
 }
-
-

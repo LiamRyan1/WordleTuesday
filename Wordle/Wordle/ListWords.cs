@@ -13,7 +13,6 @@ namespace Wordle
     public class ListWords
     {
         List<string> words = new List<string>();
-        HttpClient httpClient;
         string savedfilelocation = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "words.txt");
 
         public async Task getWordList()
@@ -46,7 +45,7 @@ namespace Wordle
             {
                 var responseStream = await httpClient.GetStreamAsync("https://raw.githubusercontent.com/DonH-ITS/jsonfiles/main/words.txt");
                 using var fileStream = new FileStream(savedfilelocation, FileMode.Create);
-                responseStream.CopyToAsync(fileStream);
+               await responseStream.CopyToAsync(fileStream);
             }
         }
         public String GenerateRandomWord()

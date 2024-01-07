@@ -862,6 +862,21 @@
     <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-400.png">
       <PackagePath>appiconWideTile.scale-400.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\background1.scale-100.png">
+      <PackagePath>background1.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\background1.scale-125.png">
+      <PackagePath>background1.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\background1.scale-150.png">
+      <PackagePath>background1.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\background1.scale-200.png">
+      <PackagePath>background1.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\background1.scale-400.png">
+      <PackagePath>background1.scale-400.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-100.png">
       <PackagePath>dotnet_bot.scale-100.png</PackagePath>
     </AppxPackagedFile>
@@ -877,6 +892,21 @@
     <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\gethelp.scale-100.png">
+      <PackagePath>gethelp.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\gethelp.scale-125.png">
+      <PackagePath>gethelp.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\gethelp.scale-150.png">
+      <PackagePath>gethelp.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\gethelp.scale-200.png">
+      <PackagePath>gethelp.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\gethelp.scale-400.png">
+      <PackagePath>gethelp.scale-400.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\help.scale-100.png">
       <PackagePath>help.scale-100.png</PackagePath>
     </AppxPackagedFile>
@@ -891,6 +921,21 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\help.scale-400.png">
       <PackagePath>help.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settingbackground.scale-100.png">
+      <PackagePath>settingbackground.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settingbackground.scale-125.png">
+      <PackagePath>settingbackground.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settingbackground.scale-150.png">
+      <PackagePath>settingbackground.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settingbackground.scale-200.png">
+      <PackagePath>settingbackground.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settingbackground.scale-400.png">
+      <PackagePath>settingbackground.scale-400.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settings.scale-100.png">
       <PackagePath>settings.scale-100.png</PackagePath>
@@ -921,6 +966,21 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settingsdark.scale-400.png">
       <PackagePath>settingsdark.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\welcomebackground.scale-100.png">
+      <PackagePath>welcomebackground.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\welcomebackground.scale-125.png">
+      <PackagePath>welcomebackground.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\welcomebackground.scale-150.png">
+      <PackagePath>welcomebackground.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\welcomebackground.scale-200.png">
+      <PackagePath>welcomebackground.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\tiafa\OneDrive - Atlantic TU\Year 2\Internet and Mobile Application Development\Wordle\LiamRyan\Wordle\Wordle\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\welcomebackground.scale-400.png">
+      <PackagePath>welcomebackground.scale-400.png</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

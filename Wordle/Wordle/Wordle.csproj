@@ -49,9 +49,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\gethelp.svg" />
 	  <None Remove="Resources\Images\help.svg" />
+	  <None Remove="Resources\Images\settingbackground.svg" />
 	  <None Remove="Resources\Images\settings.svg" />
 	  <None Remove="Resources\Images\settingsdark.svg" />
+	  <None Remove="Resources\Images\welcomebackground.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

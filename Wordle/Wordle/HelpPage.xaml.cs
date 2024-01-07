@@ -6,4 +6,8 @@ public partial class HelpPage : ContentPage
 	{
 		InitializeComponent();
 	}
+    private async void OnLinkTapped(object sender, EventArgs e)
+    {
+        await Launcher.OpenAsync(new Uri("https://www.nytimes.com/games/wordle/index.html"));
+    }
 }
