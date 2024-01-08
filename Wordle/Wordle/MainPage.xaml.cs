@@ -129,7 +129,7 @@ public partial class MainPage : ContentPage
             else if (button.Text == "delete")
             {
                 deleteLastLetter();
-                count--;
+                
             }
             else if (button.Text == "submit" && count >= 5)
             {
@@ -149,27 +149,33 @@ public partial class MainPage : ContentPage
             {
                 revealFirstAndLastLetter();
             }
-            // Update the content of the first empty frame in the letter grid
             else
             {
-                //keep count of how many letters have been added to the gri
+                //keep count of how many letters have been added to the row
                 if (count < 5)
                 {
                     addLetter(letter);
-
+                    count++;
                 }
                 else
                 {
                     await DisplayAlert("Button Clicked", $"The row is full please submit", "OK");
-                    count--;
+                   
                 }
-                count++;
+               
             }
         }
     }
+    private bool IsRowValidated(int row)
+    {
+        //check if any of the backgrounds of frames have had there color changed via validation
+        return LetterCaptureGrid.Children
+            .OfType<Frame>()
+            .Any(frame => Grid.GetRow(frame) == row && (frame.BackgroundColor.Equals(Color.FromRgb(34, 139, 34)) || frame.BackgroundColor.Equals(Color.FromRgb(204, 204, 0)) || frame.BackgroundColor.Equals(Color.FromRgb(100, 100,100))));
+    }
     private void deleteLastLetter()
     {
-        // Find the last frame with a letter
+        //find the last frame with a letter
         Frame lastFrame = null;
 
         foreach (Frame frame in LetterCaptureGrid.Children.OfType<Frame>().Where(f => f.Content is Label))
@@ -179,14 +185,14 @@ public partial class MainPage : ContentPage
 
         if (lastFrame != null && lastFrame.Content is Label label)
         {
-
-            label.Text = string.Empty;
-
-
-            lastFrame.Content = null;
-
-
-            lastFrame.Focus();
+            int row = Grid.GetRow(lastFrame);
+            if (!IsRowValidated(row))
+            {
+                label.Text = string.Empty;
+                lastFrame.Content = null;
+                lastFrame.Focus();
+                count--;
+            }
         }
     }
 
@@ -255,7 +261,7 @@ public partial class MainPage : ContentPage
             string playerWord = guessedWord.ToString().ToUpper();
             if (list.WordExists(playerWord))
             {
-
+                
                 //Compare the row content with the Word of the Day
                 if (playerWord.Equals(wordOfTheDay, StringComparison.OrdinalIgnoreCase))
                 {
@@ -521,7 +527,6 @@ public partial class MainPage : ContentPage
 
         //reset the count
         count = 0;
-
         //generate new word
         newWord = true;
         WordofTheDay();
