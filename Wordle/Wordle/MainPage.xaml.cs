@@ -233,7 +233,7 @@ public partial class MainPage : ContentPage
             word = list.GenerateRandomWord();
             newWord = false;
         }
-        return "isles";
+        return word;
     }
     //check if guessed word is correct
     private async void validateWord()
@@ -262,23 +262,21 @@ public partial class MainPage : ContentPage
             if (list.WordExists(playerWord))
             {
                 
-                //Compare the row content with the Word of the Day
+                //compare the row content with the Word of the Day
                 if (playerWord.Equals(wordOfTheDay, StringComparison.OrdinalIgnoreCase))
                 {
                     for (int j = 0; j < playerWord.Length; j++)
                     {
                         char guessedLetter = playerWord[j];
 
-                        // Find all Frames with the guessed letter in the specified row
+                        //find all Frames with the guessed letter in the specified row
                         var matchingFrames = LetterCaptureGrid.Children
                             .OfType<Frame>()
                             .Where(frame => Grid.GetRow(frame) == i && frame.Content is Label label && label.Text == guessedLetter.ToString())
                             .ToList();
-
-                        // Update the background color for all matching Frames
                         foreach (var frame in matchingFrames)
                         {
-                            frame.BackgroundColor = Color.FromRgb(34, 139, 34); // Highlight green
+                            frame.BackgroundColor = Color.FromRgb(34, 139, 34); //highlight green
                         }
                     }
                     await DisplayAlert("Congratulations!", "You guessed correctly!", "OK");
@@ -299,7 +297,7 @@ public partial class MainPage : ContentPage
                     Dictionary<char, int> wordOfTheDayLetterCounts = new Dictionary<char, int>();
                     Dictionary<char, int> guessedWordLetterCounts = new Dictionary<char, int>();
 
-                    // Populate the letter counts for the word of the day
+                    //populate the letter counts for the word of the day
                     foreach (char letter in wordOfTheDay)
                     {
                         wordOfTheDayLetterCounts.TryGetValue(letter, out int count);
@@ -311,21 +309,21 @@ public partial class MainPage : ContentPage
                         char guessedLetter = playerWord[j];
                         char actualLetter = wordOfTheDay[j];
 
-                        // Initialize frame
+                        //initialize frame
                         var frame = LetterCaptureGrid.Children
                             .OfType<Frame>()
                             .FirstOrDefault(f => Grid.GetRow(f) == i && Grid.GetColumn(f) == j);
 
                         if (frame != null)
                         {
-                            // Update guessed word letter counts
+                            //update guessed word letter counts
                             guessedWordLetterCounts.TryGetValue(guessedLetter, out int guessedWordCount);
                             guessedWordLetterCounts[guessedLetter] = guessedWordCount + 1;
 
-                            // Check correct position
+                            //check correct position
                             if (guessedLetter == actualLetter)
                             {
-                                frame.BackgroundColor = Color.FromRgb(34, 139, 34); // Highlight green
+                                frame.BackgroundColor = Color.FromRgb(34, 139, 34); //highlight green
                             }
                             else
                             {
@@ -335,21 +333,21 @@ public partial class MainPage : ContentPage
 
                                 if (correctOccurrencesCount > 0)
                                 {
-                                    frame.BackgroundColor = Color.FromRgb(204, 204, 0); // Highlight yellow
+                                    frame.BackgroundColor = Color.FromRgb(204, 204, 0); //highlight yellow
                                 }
                                 else if (incorrectOccurrencesCount > 0)
                                 {
-                                    frame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
+                                    frame.BackgroundColor = Color.FromRgb(100, 100, 100); //highlight gray
                                 }
                             }
                         }
                     }
 
-                    // Highlight the excess letters in the guessed word as gray
-                    foreach (var kvp in guessedWordLetterCounts)
+                    //highlight the excess letters in the guessed word as gray
+                    foreach (var excess in guessedWordLetterCounts)
                     {
-                        char letter = kvp.Key;
-                        int excessCount = kvp.Value - wordOfTheDayLetterCounts.GetValueOrDefault(letter, 0);
+                        char letter = excess.Key;
+                        int excessCount = excess.Value - wordOfTheDayLetterCounts.GetValueOrDefault(letter, 0);
 
                         if (excessCount > 0)
                         {
