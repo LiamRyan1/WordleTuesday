@@ -97,7 +97,10 @@ public partial class MainPage : ContentPage
             BackgroundColor = Color.FromRgb(0, 0, 0),
             BorderColor = Color.FromRgb(255, 255, 255),
         };
-        buttons.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Button)) * 0.8;
+       if(Device.RuntimePlatform == Device.Android)
+        {
+            buttons.FontSize = 9;
+        }
 
         buttons.Clicked += OnButtonClicked;
         return buttons;
@@ -109,8 +112,8 @@ public partial class MainPage : ContentPage
         string[,] Letter = new string[,]
         {
             {"Q","W","E","R","T","Y","U","I","O","P"},
-            {"A","S","D","F","G","H","J","K","L","Hint"},
-            { "Z","X","C","V","B","N","M","delete","submit","exit"}
+            {"A","S","D","F","G","H","J","K","L","?"},
+            { "Z","X","C","V","B","N","M","<",">","!"}
         };
 
         return Letter[row, column];
@@ -121,31 +124,27 @@ public partial class MainPage : ContentPage
         if (sender is Button button)
         {
             // Get the clicked letter from the button
-            string letter = button.Text;
-            if (button.Text == "")
-            {
-                await DisplayAlert("Button Clicked", $"You clicked button is empty", "OK");
-            }
-            else if (button.Text == "delete")
+            string letter = button.Text;       
+            if (button.Text == "<")
             {
                 deleteLastLetter();
                 
             }
-            else if (button.Text == "submit" && count >= 5)
+            else if (button.Text == ">" && count >= 5)
             {
                 validateWord();
                 count = 0;
             }
-            else if (button.Text == "submit" && count < 5)
+            else if (button.Text == ">" && count < 5)
             {
-                await DisplayAlert("Button Clicked", $"The row is not full please fill the row before submitting submit", "OK");
+                await DisplayAlert("Button Clicked", $"The row is not full please fill the row before submitting", "OK");
             }
-            else if (button.Text == "exit")
+            else if (button.Text == "!")
             {
                 ResetGame();
                 sendToWelcomePage();
             }
-            else if (button.Text == "Hint")
+            else if (button.Text == "?")
             {
                 revealFirstAndLastLetter();
             }

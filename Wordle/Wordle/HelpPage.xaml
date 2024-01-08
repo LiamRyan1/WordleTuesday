@@ -50,6 +50,13 @@
                            FontAttributes="Bold"
                         TextColor="{DynamicResource SecondaryColor}"
                       />
+                    <Label Text="5. open angle bracket = delete the last word  , > = submit, ? = gives a hint of the first and last letter, and ! sends you back to the login screen"
+                         FontSize="16"
+                         HorizontalOptions="CenterAndExpand"
+                         Margin="0,0,0,5"
+                          FontAttributes="Bold"
+                         TextColor="{DynamicResource SecondaryColor}"
+                          />
                 </StackLayout>
                 <Label Text="For additional help or tips, visit the official Wordle website by clicking here."
                    FontSize="16"
