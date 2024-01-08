@@ -268,11 +268,18 @@ public partial class MainPage : ContentPage
                     for (int j = 0; j < playerWord.Length; j++)
                     {
                         char guessedLetter = playerWord[j];
-                        //player guessed correctly
-                        LetterCaptureGrid.Children
-                                  .OfType<Frame>()
-                                  .First(frame => Grid.GetRow(frame) == i && frame.Content is Label label && label.Text == guessedLetter.ToString())
-                                  .BackgroundColor = Color.FromRgb(34, 139, 34);
+
+                        // Find all Frames with the guessed letter in the specified row
+                        var matchingFrames = LetterCaptureGrid.Children
+                            .OfType<Frame>()
+                            .Where(frame => Grid.GetRow(frame) == i && frame.Content is Label label && label.Text == guessedLetter.ToString())
+                            .ToList();
+
+                        // Update the background color for all matching Frames
+                        foreach (var frame in matchingFrames)
+                        {
+                            frame.BackgroundColor = Color.FromRgb(34, 139, 34); // Highlight green
+                        }
                     }
                     await DisplayAlert("Congratulations!", "You guessed correctly!", "OK");
                     bool restartView = await DisplayAlert("Question?", "Would you like to play again or return to welcomePage", "return", "Restart");
@@ -299,8 +306,6 @@ public partial class MainPage : ContentPage
                         wordOfTheDayLetterCounts[letter] = count + 1;
                     }
 
-                    bool correctPositionEncountered = false;
-
                     for (int j = 0; j < playerWord.Length; j++)
                     {
                         char guessedLetter = playerWord[j];
@@ -317,11 +322,10 @@ public partial class MainPage : ContentPage
                             guessedWordLetterCounts.TryGetValue(guessedLetter, out int guessedWordCount);
                             guessedWordLetterCounts[guessedLetter] = guessedWordCount + 1;
 
-                            // Check correct position first
-                            if (guessedLetter == actualLetter && !correctPositionEncountered)
+                            // Check correct position
+                            if (guessedLetter == actualLetter)
                             {
                                 frame.BackgroundColor = Color.FromRgb(34, 139, 34); // Highlight green
-                                correctPositionEncountered = true;
                             }
                             else
                             {
@@ -331,18 +335,11 @@ public partial class MainPage : ContentPage
 
                                 if (correctOccurrencesCount > 0)
                                 {
-                                    if (incorrectOccurrencesCount < correctOccurrencesCount)
-                                    {
-                                        frame.BackgroundColor = Color.FromRgb(204, 204, 0); // Highlight yellow
-                                    }
-                                    else
-                                    {
-                                        frame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
-                                    }
-                                }
-                                else
-                                {
                                     frame.BackgroundColor = Color.FromRgb(204, 204, 0); // Highlight yellow
+                                }
+                                else if (incorrectOccurrencesCount > 0)
+                                {
+                                    frame.BackgroundColor = Color.FromRgb(100, 100, 100); // Highlight gray
                                 }
                             }
                         }
